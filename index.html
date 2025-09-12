@@ -27,7 +27,6 @@ main.page{padding:90px 14px 40px;min-height:100vh;}
 .rekening-info div{font-size:18px;font-weight:700;margin-top:4px;}
 .btn{display:inline-block;margin-top:12px;padding:12px 16px;border-radius:10px;border:none;font-weight:700;cursor:pointer;background:var(--button);color:#fff;transition:0.3s;position:relative;}
 .btn:hover{opacity:0.9;}
-.tooltip{position:absolute;top:-28px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:6px 10px;border-radius:6px;font-size:12px;opacity:0;pointer-events:none;transition:0.3s;}
 .amount-wrapper{position:relative;margin-top:20px;text-align:center;display:flex;justify-content:center;align-items:center;gap:12px;}
 .amount-wrapper input{padding:16px 12px;border-radius:12px;border:2px solid rgba(0,0,0,0.15);font-weight:700;font-size:18px;text-align:center;width:180px;transition:0.3s;outline:none;}
 .amount-wrapper input:focus{border-color:var(--accent); box-shadow:0 0 14px rgba(12,182,222,0.5);}
@@ -43,14 +42,15 @@ main.page{padding:90px 14px 40px;min-height:100vh;}
 .swing-row h3{font-size:20px;margin-bottom:8px;color:var(--accent);}
 .swing-row p{font-size:14px;line-height:1.6;color:var(--background);}
 footer.site-footer{margin-top:40px;padding:24px 14px;background:#fff;color:var(--primary);text-align:center;border-top:2px solid var(--accent);}
-footer.site-footer img{height:28px;margin-bottom:8px;}
+footer.site-footer img{height:28px;margin:6px 0;}
 footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
 #loadingOverlay{position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(21,19,81,0.8); color:#fff; font-weight:600; z-index:2000;}
 .spinner{width:50px;height:50px;border:6px solid rgba(255,255,255,0.2);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:12px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 #backToTop{position:fixed; bottom:20px; right:20px; background:var(--button); color:#fff; border:none; border-radius:50%; width:50px; height:50px; font-size:24px; cursor:pointer; display:none; align-items:center; justify-content:center; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.3); transition:0.3s;}
 #backToTop:hover{background:var(--accent);}
-#toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--accent);color:#fff;padding:16px 24px;border-radius:12px;font-weight:700;font-size:16px;opacity:0;pointer-events:none;transition:opacity 0.4s;z-index:3000;}
+#toast{position:fixed;top:-80px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:16px 24px;border-radius:12px;font-weight:700;font-size:16px;opacity:0;pointer-events:none;transition:all 0.5s ease;z-index:3000;}
+#toast.show{top:50px;opacity:1;}
 @media (max-width:1024px){.swing-row{flex-direction:column;text-align:center;}.swing-row .description{margin-bottom:12px;}.swing-row img{max-width:90%;}}
 @media (max-width:520px){ .card{padding:18px;margin:0 10px;} .amount-wrapper{flex-direction:column;gap:8px;} }
 </style>
@@ -77,9 +77,7 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
       <div id="holderName">-</div>
       <strong>Nomor Rekening:</strong>
       <div id="acctNumber">-</div>
-      <button class="btn" id="copyAcctBtn">Salin Nomor Rekening
-        <span class="tooltip" id="acctTooltip">Disalin!</span>
-      </button>
+      <button class="btn" id="copyAcctBtn">Salin Nomor Rekening</button>
     </div>
 
     <div class="amount-wrapper">
@@ -127,14 +125,6 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
       <img src="https://www.fazzfinance.id/_nuxt/image/7c62f4.webp" alt="multiuse">
     </div>
 
-    <div class="swing-row" data-row>
-      <img src="https://www.fazzfinance.id/_nuxt/image/7e65fa.webp" alt="Tambahan Gambar">
-      <div class="description">
-        <h3>Tambahan Produk</h3>
-        <p>Deskripsi produk tambahan dengan visual menarik sesuai kebutuhan.</p>
-      </div>
-    </div>
-
   </section>
 </main>
 
@@ -146,7 +136,8 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
   <p>Jl. DR. Ide Anak Agung Gde Agung No.2, RT.5/RW.2</p>
   <p>Kuningan Timur, Setiabudi</p>
   <p>Jakarta Selatan 12950</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/OJK_Logo.png" alt="OJK Logo" style="height:40px;margin-top:8px;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/OJK_Logo.png" alt="OJK Logo" style="height:40px;margin:6px 0;">
+  <img src="https://www.fazzfinance.id/_nuxt/image/7c62f4.webp" alt="LAPS SJK" style="height:40px;margin:6px 0;">
   <p>© <span id="year"></span> PT Fazz Capital Finance</p>
 </footer>
 
@@ -174,16 +165,15 @@ const els = {
   payNowBtn: document.getElementById("payNowBtn"),
   yearEl: document.getElementById("year"),
   swingRows: document.querySelectorAll(".swing-row"),
+  toast: document.getElementById("toast"),
 };
 
 els.yearEl.textContent = new Date().getFullYear();
 
-// Toast popup
 function showToast(message){
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.style.opacity = 1;
-  setTimeout(()=>{toast.style.opacity = 0;},2000);
+  els.toast.textContent = message;
+  els.toast.classList.add("show");
+  setTimeout(()=>els.toast.classList.remove("show"),2000);
 }
 
 function onlyDigits(s){ return (s||'').toString().replace(/[^\d]/g,''); }
@@ -224,20 +214,16 @@ els.amountInput.addEventListener("input", e=>{
 
 els.payNowBtn.addEventListener("click",()=>{window.open("https://platform00.com/","_blank");});
 
-// Back to top
 const backToTop = document.getElementById("backToTop");
 window.addEventListener("scroll",()=>{backToTop.style.display=window.scrollY>300?"flex":"none";});
 backToTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
 
-// Animate products on scroll
 function animateRows(){els.swingRows.forEach(r=>{const rect=r.getBoundingClientRect(); if(rect.top<window.innerHeight*0.9) r.classList.add("show");});}
 window.addEventListener("scroll",animateRows);
 window.addEventListener("load",animateRows);
 
-// URL params
 function getUrlParams(){const p=new URLSearchParams(window.location.search); return {amount:p.get("amount")};}
 
-// Load data
 async function loadData(){
   const params=getUrlParams();
   try{
@@ -260,6 +246,5 @@ async function loadData(){
 }
 loadData();
 </script>
-
 </body>
 </html>
