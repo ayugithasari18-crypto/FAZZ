@@ -1,237 +1,310 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAZZ Capital Finance</title>
-  <link rel="icon" type="image/png" href="https://www.fazzfinance.id/favicon-32x32.png">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #F7F7F7;
-      color: #151351;
-    }
-    header {
-      background: #151351;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 { margin: 0; font-size: 1.5rem; }
-    .container {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 0 15px;
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    }
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .bank-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .bank-logo {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-    }
-    .account-number {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #088ffd;
-    }
-    .input-group {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .input-group input {
-      flex: 1;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-    .preset-btn {
-      padding: 6px 12px;
-      border: none;
-      border-radius: 6px;
-      background: #0CB6DE;
-      color: #fff;
-      cursor: pointer;
-      font-size: 13px;
-    }
-    .actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    button.copy-btn {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      background: #088ffd;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    button.copy-btn:hover {
-      background: #0CB6DE;
-    }
-    footer {
-      background:#151351;
-      color:#F7F7F7;
-      padding:40px 20px;
-      font-family:sans-serif;
-      margin-top: 40px;
-    }
-    footer .footer-content {
-      max-width:1200px;
-      margin:auto;
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:space-between;
-      align-items:center;
-      gap:20px;
-    }
-    footer img {
-      max-height: 45px;
-      margin-bottom: 10px;
-    }
-    footer p {
-      margin: 0;
-    }
-    footer .copyright {
-      margin-top:30px;
-      text-align:center;
-      font-size:13px;
-      color:#ccc;
-      border-top:1px solid rgba(255,255,255,0.1);
-      padding-top:15px;
-    }
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #151351;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 6px;
-      display: none;
-      z-index: 999;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FAZZ Capital Finance — Transfer Cepat</title>
+<link rel="icon" href="https://www.fazzfinance.id/favicon-32x32.png" />
+<style>
+  :root{
+    --primary:#151351;
+    --accent:#0CB6DE;
+    --accent2:#088ffd;
+    --bg:#F7F7F7;
+    --muted:#5C5970;
+    --text:#111028;
+    --radius:12px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--text)}
+  .wrap{max-width:720px;margin:28px auto;padding:20px}
+  .card{
+    background:linear-gradient(180deg,#fff,#fbfdff);
+    border-radius:var(--radius);
+    padding:22px;
+    box-shadow:0 10px 30px rgba(21,19,81,0.06);
+    display:flex;
+    gap:18px;
+    align-items:center;
+    flex-direction:column;
+  }
+
+  /* Bank area */
+  .bank-logo{
+    width:96px;height:96px;border-radius:14px;background:rgba(5,8,25,0.03);display:flex;align-items:center;justify-content:center;overflow:hidden;
+  }
+  .bank-logo img{max-width:90%;max-height:90%;object-fit:contain;display:block}
+
+  .bank-name{font-weight:700;color:var(--primary);font-size:18px;margin-top:6px}
+  .account-name{font-size:15px;color:var(--muted);margin-top:6px}
+  .account-number{
+    font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+    font-size:20px;
+    letter-spacing:1px;
+    margin-top:10px;
+    color:var(--accent2);
+  }
+
+  /* Amount area */
+  .amount-row{width:100%;display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap;justify-content:space-between}
+  .amount-input{padding:10px 12px;border-radius:10px;border:1px solid rgba(6,14,40,0.06);min-width:180px;font-size:16px}
+  .presets{display:flex;gap:8px;flex-wrap:wrap}
+  .preset{background:transparent;border:1px dashed rgba(9,10,32,0.06);padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:600}
+
+  /* Actions */
+  .actions{width:100%;display:flex;gap:12px;justify-content:flex-end;margin-top:12px}
+  button.primary{
+    background:var(--accent2);color:white;border:none;padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:700
+  }
+  button.secondary{background:transparent;border:1px solid rgba(9,10,32,0.06);padding:10px 14px;border-radius:10px;cursor:pointer}
+
+  /* Footer */
+  footer{margin-top:28px;background:var(--primary);color:#fff;padding:20px;border-radius:10px}
+  .footer-inner{max-width:720px;margin:0 auto;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .footer-inner img{height:40px;object-fit:contain}
+  .footer-text{font-size:13px;color:rgba(255,255,255,0.9);line-height:1.5}
+  .copyright{text-align:center;margin-top:12px;color:rgba(255,255,255,0.75);font-size:13px}
+
+  /* Toast */
+  .toast{position:fixed;right:18px;bottom:18px;background:var(--primary);color:white;padding:10px 14px;border-radius:10px;display:none;box-shadow:0 10px 30px rgba(5,5,20,0.28)}
+  /* Responsive */
+  @media (max-width:520px){
+    .bank-logo{width:82px;height:82px}
+    .account-number{font-size:18px}
+    .amount-row{flex-direction:column;align-items:stretch}
+    .actions{justify-content:stretch}
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>FAZZ Capital Finance - Informasi Rekening</h1>
-  </header>
-  <main class="container" id="accounts"></main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div>
-        <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="Fazz Capital Finance Logo">
-        <img src="https://www.fazzfinance.id/_nuxt/image/7e65fa.webp" alt="Fazz Finance Alt Logo" style="max-height:40px;">
+  <div class="wrap">
+    <div class="card" id="card">
+      <!-- Bank logo -->
+      <div class="bank-logo" id="bankLogo" aria-hidden="false">
+        <img src="" alt="Logo Bank" id="bankLogoImg">
       </div>
-      <div>
-        <p><strong>PT. Fazz Capital Finance</strong><br>
-          Jl. Jenderal Sudirman Kav. 52-53<br>
-          SCBD, Jakarta Selatan 12190, Indonesia</p>
-        <p style="margin-top:10px; font-size:13px; color:#ccc;">
-          PT. Fazz Capital Finance berizin dan diawasi oleh <strong>Otoritas Jasa Keuangan (OJK)</strong>.
-        </p>
+
+      <!-- Nama rekening -->
+      <div class="bank-name" id="bankName">—</div>
+      <div class="account-name" id="accountHolder">—</div>
+
+      <!-- Nomor rekening -->
+      <div class="account-number" id="accountNumber" aria-label="Nomor rekening">—</div>
+
+      <!-- Jumlah Transfer -->
+      <div class="amount-row" aria-label="Jumlah transfer">
+        <input id="amountInput" class="amount-input" type="text" inputmode="numeric" placeholder="Masukkan jumlah transfer (mis. 150000)" aria-label="Jumlah transfer">
+        <div class="presets" role="group" aria-label="Preset nominal">
+          <button class="preset" data-value="50000">50k</button>
+          <button class="preset" data-value="100000">100k</button>
+          <button class="preset" data-value="150000">150k</button>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button class="secondary" id="copyNumberOnly" title="Salin nomor rekening">Salin Nomor</button>
+        <button class="primary" id="copyWithAmount" title="Salin nomor + nominal">Salin (Nomor + Jumlah)</button>
       </div>
     </div>
-    <div class="copyright">
-      © 2025 PT. Fazz Capital Finance. All rights reserved.
-    </div>
-  </footer>
 
-  <div id="toast" class="toast"></div>
+    <!-- Footer profesional -->
+    <footer>
+      <div class="footer-inner">
+        <div style="display:flex;gap:12px;align-items:center">
+          <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="Fazz Capital Finance">
+          <div class="footer-text">
+            <strong>PT. Fazz Capital Finance</strong><br>
+            Jl. Jenderal Sudirman Kav. 52-53, SCBD<br>
+            Jakarta Selatan 12190, Indonesia<br>
+            Terdaftar dan diawasi oleh <strong>Otoritas Jasa Keuangan (OJK)</strong>.
+          </div>
+        </div>
+        <img src="https://www.fazzfinance.id/_nuxt/image/7e65fa.webp" alt="Fazz Logo Alt">
+      </div>
+      <div class="copyright">© 2025 PT Fazz Capital Finance</div>
+    </footer>
+  </div>
 
-  <script>
-    const API_ENDPOINT = "https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec";
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 2500);
+<script>
+/*
+  Single-account page:
+  - Fetch the account data from API (expects an array or object containing account(s))
+  - Use the FIRST account by default (or bank filter if ?bank=NAME is present)
+  - Render Logo, Account Name, Account Number
+  - Allow entering amount or choose preset
+  - Copy actions:
+      - "Salin Nomor": copies only the account number
+      - "Salin (Nomor + Jumlah)": copies a formatted string containing bank, number, name, and nominal (if set)
+*/
+
+// -------- CONFIGURATION --------
+const API_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec';
+
+// Optional fallback logos (if API doesn't provide) - replace with your preferred assets
+const FALLBACK_LOGOS = {
+  'BCA': 'https://upload.wikimedia.org/wikipedia/commons/6/62/BCA_logo.svg',
+  'BRI': 'https://upload.wikimedia.org/wikipedia/commons/3/30/BRI_logo.svg',
+  'Mandiri': 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Mandiri_logo.svg',
+  'BNI': 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Bank_Negara_Indonesia_logo.svg'
+};
+
+// -------- DOM REFERENCES --------
+const bankLogoImg = document.getElementById('bankLogoImg');
+const bankNameEl = document.getElementById('bankName');
+const accountHolderEl = document.getElementById('accountHolder');
+const accountNumberEl = document.getElementById('accountNumber');
+const amountInput = document.getElementById('amountInput');
+const toast = document.getElementById('toast');
+const copyNumberBtn = document.getElementById('copyNumberOnly');
+const copyWithAmountBtn = document.getElementById('copyWithAmount');
+
+// -------- HELPERS --------
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  setTimeout(()=> toast.style.display = 'none', 2500);
+}
+
+function formatRupiah(num) {
+  if(num === '' || num === null || num === undefined) return '';
+  const n = Number(num);
+  if (Number.isNaN(n)) return '';
+  return 'Rp ' + n.toLocaleString('id-ID');
+}
+
+function parseNumberFromInput(s) {
+  if (!s) return '';
+  // Remove non digits
+  const digits = String(s).replace(/\D/g,'');
+  if(!digits) return '';
+  return parseInt(digits, 10);
+}
+
+// Accepts API account object and returns standardized fields
+function normalizeAccount(acc) {
+  // try different common field names
+  return {
+    bank: acc.bank || acc.bankName || acc.bank_name || acc.bank_label || '',
+    accountName: acc.accountName || acc.name || acc.account_holder || acc.holder || '',
+    accountNumber: acc.accountNumber || acc.account_number || acc.noRek || acc.rek || acc.number || ''
+    , logo: acc.logoUrl || acc.logo || acc.logo_url || acc.logo_link || ''
+  };
+}
+
+// -------- FETCH & RENDER --------
+async function loadAccount() {
+  try {
+    const res = await fetch(API_ENDPOINT, {cache:'no-store'});
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+
+    // Accept multiple shapes: array, {data:[...]}, or single object
+    let accounts = [];
+    if (Array.isArray(data)) accounts = data;
+    else if (Array.isArray(data.data)) accounts = data.data;
+    else if (Array.isArray(data.accounts)) accounts = data.accounts;
+    else accounts = [data];
+
+    // Optionally filter by ?bank=... (useful for deep-linking)
+    const params = new URLSearchParams(location.search);
+    const bankParam = params.get('bank')?.toLowerCase();
+
+    let selected;
+    if (bankParam) {
+      selected = accounts.map(normalizeAccount).find(a => (a.bank || '').toLowerCase() === bankParam);
+    }
+    if (!selected) {
+      selected = normalizeAccount(accounts[0] || {});
     }
 
-    async function fetchAccounts() {
-      try {
-        const res = await fetch(API_ENDPOINT);
-        const data = await res.json();
-        renderAccounts(data);
-      } catch (e) {
-        console.error("Error fetching data:", e);
-      }
-    }
+    renderAccount(selected);
+  } catch (err) {
+    console.error('Gagal memuat akun:', err);
+    bankNameEl.textContent = 'Gagal memuat data';
+    accountHolderEl.textContent = '';
+    accountNumberEl.textContent = '—';
+  }
+}
 
-    function renderAccounts(accounts) {
-      const container = document.getElementById('accounts');
-      container.innerHTML = "";
-      accounts.forEach(acc => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <div class="bank-info">
-            <img class="bank-logo" src="${acc.logoUrl || ''}" alt="${acc.bank || 'Bank'}">
-            <div>
-              <div><strong>${acc.bank}</strong></div>
-              <div class="account-number">${acc.accountNumber}</div>
-              <div>${acc.accountName || ''}</div>
-            </div>
-          </div>
-          <div class="input-group">
-            <input type="number" placeholder="Masukkan nominal" id="nominal-${acc.accountNumber}">
-            <button class="preset-btn" data-value="50000">50k</button>
-            <button class="preset-btn" data-value="100000">100k</button>
-            <button class="preset-btn" data-value="150000">150k</button>
-          </div>
-          <div class="actions">
-            <button class="copy-btn" data-number="${acc.accountNumber}" data-bank="${acc.bank}" data-name="${acc.accountName || ''}">Salin</button>
-          </div>
-        `;
-        container.appendChild(card);
+function renderAccount(acc) {
+  // Bank logo
+  const logoUrl = acc.logo || FALLBACK_LOGOS[acc.bank] || '';
+  if (logoUrl) {
+    bankLogoImg.src = logoUrl;
+    bankLogoImg.alt = acc.bank ? (acc.bank + ' logo') : 'Logo bank';
+  } else {
+    bankLogoImg.removeAttribute('src');
+    bankLogoImg.alt = 'Logo bank';
+  }
 
-        // preset buttons
-        card.querySelectorAll('.preset-btn').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const input = card.querySelector(`#nominal-${acc.accountNumber}`);
-            input.value = btn.dataset.value;
-          });
-        });
+  bankNameEl.textContent = acc.bank || 'Bank';
+  accountHolderEl.textContent = acc.accountName || 'Nama Pemilik Rekening';
+  accountNumberEl.textContent = acc.accountNumber || '—';
 
-        // copy button
-        card.querySelector('.copy-btn').addEventListener('click', () => {
-          const nominal = card.querySelector(`#nominal-${acc.accountNumber}`).value;
-          let text = `${acc.bank} - ${acc.accountNumber} | ${acc.accountName}`;
-          if (nominal) text += ` — Nominal: Rp${Number(nominal).toLocaleString('id-ID')}`;
-          navigator.clipboard.writeText(text).then(() => {
-            showToast("Disalin: " + text);
-          });
-        });
-      });
-    }
+  // Build accessible labels
+  accountNumberEl.setAttribute('aria-label', 'Nomor rekening ' + (acc.accountNumber || ''));
+}
 
-    fetchAccounts();
-  </script>
+// -------- COPY HANDLERS --------
+copyNumberBtn.addEventListener('click', async () => {
+  const number = accountNumberEl.textContent.trim();
+  if (!number || number === '—') { showToast('Nomor rekening tidak tersedia'); return; }
+  try {
+    await navigator.clipboard.writeText(number);
+    showToast('Nomor rekening disalin');
+  } catch (e) {
+    console.error(e);
+    showToast('Gagal menyalin');
+  }
+});
+
+copyWithAmountBtn.addEventListener('click', async () => {
+  const bank = bankNameEl.textContent.trim();
+  const holder = accountHolderEl.textContent.trim();
+  const number = accountNumberEl.textContent.trim();
+  let amountRaw = amountInput.value.trim();
+  const amountNum = parseNumberFromInput(amountRaw);
+  const amountText = amountNum ? formatRupiah(amountNum) : '';
+
+  let text = `${bank} - ${number} | ${holder}`;
+  if (amountText) text += ` — Nominal: ${amountText}`;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast(amountText ? 'Nomor & nominal disalin' : 'Detail rekening disalin');
+  } catch (e) {
+    console.error(e);
+    showToast('Gagal menyalin');
+  }
+});
+
+// PRESET BUTTONS (delegation)
+document.addEventListener('click', (ev) => {
+  const btn = ev.target.closest('.preset');
+  if (!btn) return;
+  const val = parseInt(btn.dataset.value, 10);
+  if (!isNaN(val)) {
+    amountInput.value = formatRupiah(val);
+    amountInput.focus();
+  }
+});
+
+// Format amount field as user types (visual formatting only)
+amountInput.addEventListener('input', () => {
+  const raw = amountInput.value;
+  const num = parseNumberFromInput(raw);
+  if (!num) {
+    amountInput.value = '';
+    return;
+  }
+  amountInput.value = formatRupiah(num);
+});
+
+// Initialize
+loadAccount();
+</script>
 </body>
 </html>
