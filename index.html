@@ -16,100 +16,44 @@
 }
 *{box-sizing:border-box; scroll-behavior:smooth;}
 body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,#151351,#0CB6DE);color:var(--background);transition:background 1s;}
-
-/* Header */
-header{
-  position:fixed; top:0; left:0; right:0; height:64px;
-  background:#fff; border-bottom:2px solid var(--accent);
-  display:flex; align-items:center; justify-content:center; z-index:1000; padding:0 18px;
-}
+header{position:fixed;top:0;left:0;right:0;height:64px;background:#fff;border-bottom:2px solid var(--accent);display:flex;align-items:center;justify-content:center;z-index:1000;padding:0 18px;}
 header img{height:36px;}
-
-/* Main Page */
-main.page{padding:90px 14px 40px; min-height:100vh;}
-
-/* Card Rekening */
-.card{
-  max-width:480px; margin:0 auto 40px; background:var(--background); color:var(--primary);
-  border-radius:14px; padding:24px; box-shadow:0 6px 18px rgba(0,0,0,0.25); display:none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity var(--fade-duration);
-  opacity:0;
-}
+main.page{padding:90px 14px 40px;min-height:100vh;}
+.card{max-width:480px;margin:0 auto 40px;background:var(--background);color:var(--primary);border-radius:14px;padding:24px;box-shadow:0 6px 18px rgba(0,0,0,0.25);display:none;transition: transform 0.3s ease, box-shadow 0.3s ease, opacity var(--fade-duration);opacity:0;}
 .card.show{opacity:1;}
 .card:hover{transform: translateY(-4px); box-shadow:0 10px 24px rgba(0,0,0,0.35);}
 .bank-logo{display:block;margin:0 auto 16px;max-width:160px;height:auto;}
 .rekening-info{text-align:center;margin-bottom:18px;}
 .rekening-info strong{display:block;font-size:13px;color:var(--muted);margin-top:8px;}
 .rekening-info div{font-size:18px;font-weight:700;margin-top:4px;}
-.btn{
-  display:inline-block;margin-top:10px;padding:10px 14px;border-radius:8px;border:none;
-  font-weight:600;cursor:pointer;background:var(--button);color:#fff;transition:0.3s;
-  position:relative;
-}
+.btn{display:inline-block;margin-top:10px;padding:10px 14px;border-radius:8px;border:none;font-weight:600;cursor:pointer;background:var(--button);color:#fff;transition:0.3s;position:relative;}
 .btn:hover{opacity:0.9;}
-.tooltip{
-  position:absolute; top:-28px; left:50%; transform:translateX(-50%);
-  background:var(--accent); color:#fff; padding:4px 8px; border-radius:6px; font-size:12px;
-  opacity:0; pointer-events:none; transition:0.3s;
-}
-
-/* Section Produk */
-.products{max-width:960px; margin:40px auto; padding:0 14px; text-align:center;}
+.tooltip{position:absolute;top:-28px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:4px 8px;border-radius:6px;font-size:12px;opacity:0;pointer-events:none;transition:0.3s;}
+.amount-wrapper{position:relative;margin-top:12px;}
+.amount-wrapper input{width:100%;max-width:300px;padding:14px 12px;border-radius:10px;border:2px solid rgba(0,0,0,0.15);font-weight:700;text-align:center;font-size:16px;transition:0.3s;outline:none;}
+.amount-wrapper input:focus{border-color:var(--accent); box-shadow:0 0 12px rgba(12,182,222,0.5);}
+.amount-wrapper label{position:absolute;top:50%;left:12px;transform:translateY(-50%);color:var(--muted);font-size:13px;pointer-events:none;transition:0.3s,font-size 0.3s;}
+.amount-wrapper input:focus + label,
+.amount-wrapper input:not(:placeholder-shown) + label{top:-8px;font-size:11px;color:var(--accent);}
+.products{max-width:960px;margin:40px auto;padding:0 14px;text-align:center;}
 .products h2{font-size:28px;margin-bottom:30px;color:var(--background);}
-.products .highlight{
-  background:linear-gradient(90deg,var(--accent),var(--button));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.swing-row{
-  display:flex; align-items:center; justify-content:space-between; margin-bottom:40px; gap:20px; flex-wrap:wrap;
-  border-radius:12px; background: rgba(255,255,255,0.05); padding:12px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity var(--fade-duration);
-  opacity:0;
-}
+.products .highlight{background:linear-gradient(90deg,var(--accent),var(--button));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.swing-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;gap:20px;flex-wrap:wrap;border-radius:12px;background: rgba(255,255,255,0.05);padding:12px;transition: transform 0.25s ease, box-shadow 0.25s ease, opacity var(--fade-duration);opacity:0;}
 .swing-row.show{opacity:1;}
-.swing-row:hover{
-  transform: scale(1.03);
-  box-shadow:0 8px 20px rgba(0,0,0,0.25);
-}
-.swing-row img{
-  flex:1 1 300px; max-width:360px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);
-}
+.swing-row:hover{transform: scale(1.03); box-shadow:0 8px 20px rgba(0,0,0,0.25);}
+.swing-row img{flex:1 1 300px; max-width:360px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);}
 .swing-row .description{flex:1 1 300px;text-align:left;color:var(--background);}
 .swing-row h3{font-size:20px;margin-bottom:8px;color:var(--accent);}
 .swing-row p{font-size:14px;line-height:1.6;color:var(--background);}
-
-/* Footer */
-footer.site-footer{
-  margin-top:40px; padding:24px 14px; background:#fff; color:var(--primary);
-  text-align:center; border-top:2px solid var(--accent);
-}
+footer.site-footer{margin-top:40px;padding:24px 14px;background:#fff;color:var(--primary);text-align:center;border-top:2px solid var(--accent);}
 footer.site-footer img{height:28px;margin-bottom:8px;}
 footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
-
-/* Loading Overlay */
-#loadingOverlay{
-  position:fixed; inset:0; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; background:rgba(21,19,81,0.8); color:#fff; font-weight:600; z-index:2000;
-}
+#loadingOverlay{position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(21,19,81,0.8); color:#fff; font-weight:600; z-index:2000;}
 .spinner{width:50px;height:50px;border:6px solid rgba(255,255,255,0.2);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:12px;}
 @keyframes spin{to{transform:rotate(360deg);}}
-
-/* Back to Top Button */
-#backToTop{
-  position:fixed; bottom:20px; right:20px; background:var(--button); color:#fff; border:none;
-  border-radius:50%; width:50px; height:50px; font-size:24px; cursor:pointer; display:none;
-  align-items:center; justify-content:center; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.3);
-  transition:0.3s;
-}
+#backToTop{position:fixed; bottom:20px; right:20px; background:var(--button); color:#fff; border:none; border-radius:50%; width:50px; height:50px; font-size:24px; cursor:pointer; display:none; align-items:center; justify-content:center; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.3); transition:0.3s;}
 #backToTop:hover{background:var(--accent);}
-
-/* Responsif */
-@media (max-width:1024px){
-  .swing-row{flex-direction:column;text-align:center;}
-  .swing-row .description{margin-bottom:12px;}
-  .swing-row img{max-width:90%;}
-}
+@media (max-width:1024px){.swing-row{flex-direction:column;text-align:center;}.swing-row .description{margin-bottom:12px;}.swing-row img{max-width:90%;}}
 @media (max-width:520px){ .card{padding:18px;margin:0 10px;} }
 </style>
 </head>
@@ -120,7 +64,6 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
 </header>
 
 <main class="page">
-  <!-- Loading -->
   <div id="loadingOverlay">
     <div class="spinner"></div>
     Memuat data rekening...
@@ -139,14 +82,12 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
       </button>
     </div>
 
-    <div class="section">
-      <div class="label">Jumlah Transfer (Rp)</div>
-      <div class="input-row">
-        <input type="text" id="amountInput" class="amount-input" placeholder="Misal: 1.500.000" inputmode="numeric" />
-        <button class="btn" id="copyAmountBtn">Salin
-          <span class="tooltip" id="amountTooltip">Disalin!</span>
-        </button>
-      </div>
+    <div class="section amount-wrapper">
+      <input type="text" id="amountInput" placeholder=" " inputmode="numeric" />
+      <label for="amountInput">Jumlah Transfer (Rp)</label>
+      <button class="btn" id="copyAmountBtn">Salin
+        <span class="tooltip" id="amountTooltip">Disalin!</span>
+      </button>
     </div>
 
     <div class="instructions">
@@ -196,8 +137,11 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
   <p>Email: support@fazzfinance.id | Tel: (021) 1234 5678</p>
 </footer>
 
-<!-- Back to Top Button -->
+<!-- Back to Top -->
 <button id="backToTop">↑</button>
+
+<!-- Confetti Canvas -->
+<canvas id="confettiCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2000;"></canvas>
 
 <script>
 const API_URL="https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec";
@@ -208,7 +152,6 @@ const bankLogos={
   mandiri:"https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg",
   bni:"https://upload.wikimedia.org/wikipedia/commons/8/8e/BNI_logo.svg"
 };
-
 const els={
   loading: document.getElementById("loadingOverlay"),
   card: document.getElementById("card"),
@@ -217,69 +160,90 @@ const els={
   acct: document.getElementById("acctNumber"),
   copyAcct: document.getElementById("copyAcctBtn"),
   copyAcctTooltip: document.getElementById("acctTooltip"),
-  amount: document.getElementById("amountInput"),
+  amountInput: document.getElementById("amountInput"),
   copyAmount: document.getElementById("copyAmountBtn"),
   copyAmountTooltip: document.getElementById("amountTooltip"),
-  backTop: document.getElementById("backToTop"),
-  swingRows: document.querySelectorAll(".swing-row")
+  swingRows: document.querySelectorAll(".swing-row"),
+  backToTop: document.getElementById("backToTop")
 };
+function onlyDigits(s){return(s||'').toString().replace(/[^\d]/g,'');}
+function formatRp(n){return n?('Rp '+Number(n).toLocaleString('id-ID')):'';}
+function setBankLogoByName(name){let logo=defaultLogo;if(name){const key=name.toLowerCase();for(const k in bankLogos){if(key.includes(k)){logo=bankLogos[k];break;}}} els.bankLogo.src=logo; els.bankLogo.alt=name?`Logo Bank ${name}`:"Logo Bank";}
+function showTooltip(el,msg){el.textContent=msg; el.style.opacity="1"; setTimeout(()=>el.style.opacity="0",2000);}
 
-function onlyDigits(s){return (s||"").replace(/\D/g,"");}
-function formatRp(n){return n?("Rp "+Number(n).toLocaleString("id-ID")):"";}
-function setBankLogo(name){
-  let logo=defaultLogo;
-  if(name){const key=name.toLowerCase(); for(const k in bankLogos){if(key.includes(k)){logo=bankLogos[k];break;}}}
-  els.bankLogo.src=logo;
-  els.bankLogo.alt="Logo Bank "+name;
+// Copy nomor rekening
+els.copyAcct.addEventListener("click",()=>{
+  const txt=els.acct.textContent||'';
+  if(txt&&txt!=='-'){navigator.clipboard.writeText(onlyDigits(txt)); showTooltip(els.copyAcctTooltip,"Disalin!");}
+});
+
+// Copy amount dengan confetti
+function triggerConfetti(){
+  const canvas=document.getElementById("confettiCanvas");
+  const ctx=canvas.getContext("2d"); canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+  let particles=[];
+  for(let i=0;i<150;i++){
+    particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height-100, r:Math.random()*6+4, d:Math.random()*20, color:`hsl(${Math.random()*360},100%,50%)`, tilt:Math.random()*10-10});
+  }
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      ctx.fillStyle=p.color;
+      ctx.beginPath();
+      ctx.moveTo(p.x+0,p.y);
+      ctx.lineTo(p.x+5+p.tilt,p.y+10);
+      ctx.lineTo(p.x-5-p.tilt,p.y+10);
+      ctx.closePath();
+      ctx.fill();
+      p.y+=Math.cos(p.d)+1+p.r/2;
+      p.x+=Math.sin(p.d);
+      if(p.y>canvas.height) p.y=-10;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+  setTimeout(()=>ctx.clearRect(0,0,canvas.width,canvas.height),1200);
 }
 
-// Salin fungsi dengan tooltip
-function copyWithTooltip(btn, tooltip, value){
-  navigator.clipboard.writeText(value).then(()=>{
-    tooltip.style.opacity=1;
-    setTimeout(()=>tooltip.style.opacity=0,1500);
-  });
+els.copyAmount.addEventListener("click",()=>{
+  const val=onlyDigits(els.amountInput.value);
+  if(val){
+    navigator.clipboard.writeText(val);
+    showTooltip(els.copyAmountTooltip,"Disalin!");
+    triggerConfetti();
+  }else{alert("Masukkan jumlah transfer");}
+});
+
+// Format input
+els.amountInput.addEventListener("input", e=>{const d=onlyDigits(e.target.value); e.target.value=d?formatRp(d):'';});
+
+// Back to top
+window.addEventListener("scroll",()=>{els.backToTop.style.display=window.scrollY>300?"flex":"none";});
+els.backToTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+// Scroll animation for products
+function animateRows(){els.swingRows.forEach(r=>{const rect=r.getBoundingClientRect();if(rect.top<window.innerHeight*0.9) r.classList.add("show");});}
+window.addEventListener("scroll",animateRows);
+window.addEventListener("load",animateRows);
+
+// Ambil parameter URL
+function getUrlParams(){
+  const p=new URLSearchParams(window.location.search);
+  return {amount:p.get("amount")};
 }
 
-els.copyAcct.addEventListener("click",()=>{const val=onlyDigits(els.acct.textContent); if(!val) return; copyWithTooltip(els.copyAcct, els.copyAcctTooltip, val);});
-els.copyAmount.addEventListener("click",()=>{const val=onlyDigits(els.amount.value); if(!val) return alert("Masukkan jumlah transfer"); copyWithTooltip(els.copyAmount, els.copyAmountTooltip, val);});
-els.amount.addEventListener("input",e=>{const d=onlyDigits(e.target.value); e.target.value=d?formatRp(d):"";});
-
-// Back to Top
-window.addEventListener("scroll",()=>{els.backTop.style.display=(window.scrollY>300)?"flex":"none";});
-els.backTop.addEventListener("click",()=>{window.scrollTo({top:0,behavior:'smooth'});});
-
-// Scroll animation observer
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){entry.target.classList.add("show");}
-  });
-},{threshold:0.15});
-
-// Observe card and products
-observer.observe(els.card);
-els.swingRows.forEach(row=>observer.observe(row));
-
-// Load Data
+// Load data rekening
 async function loadData(){
+  const urlParams=getUrlParams();
   try{
     const res=await fetch(API_URL,{cache:"no-store"});
-    const data=(await res.json()).data||await res.json();
-    const bank=data.bank||"bri";
-    const name=data.name||"John Doe";
-    const number=data.number||"1234567890";
-    setBankLogo(bank);
+    const json=await res.json(); const data=json.data||json;
+    const name=data.name||"John Doe", number=data.number||"1234567890", bank=data.bank||"bri", amount=urlParams.amount||'';
     els.holder.textContent=name;
     els.acct.textContent=number;
-  }catch(e){
-    console.error(e);
-    els.holder.textContent="John Doe";
-    els.acct.textContent="1234567890";
-    setBankLogo("bri");
-  }finally{
-    els.loading.style.display="none";
-    els.card.style.display="block";
-  }
+    setBankLogoByName(bank);
+    if(amount) els.amountInput.value=formatRp(onlyDigits(amount));
+  }catch(err){console.error(err);}finally{els.loading.style.display="none"; els.card.style.display="block"; els.card.classList.add("show");}
 }
 loadData();
 </script>
