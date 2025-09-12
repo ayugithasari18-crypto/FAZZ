@@ -29,18 +29,39 @@ main.page{padding:90px 14px 40px;min-height:100vh;}
 .btn{display:inline-block;margin-top:12px;padding:12px 16px;border-radius:10px;border:none;font-weight:700;cursor:pointer;background:var(--button);color:#fff;transition:0.3s;position:relative;}
 .btn:hover{opacity:0.9;}
 .tooltip{position:absolute;top:-28px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:6px 10px;border-radius:6px;font-size:12px;opacity:0;pointer-events:none;transition:0.3s;}
-.amount-wrapper{position:relative;margin-top:20px;text-align:center;display:flex;justify-content:center;align-items:center;gap:12px;}
-.amount-wrapper input{padding:16px 12px;border-radius:12px;border:2px solid rgba(0,0,0,0.15);font-weight:700;font-size:18px;text-align:center;width:180px;transition:0.3s;outline:none;}
+.amount-wrapper{position:relative;margin-top:20px;text-align:center;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;}
+.amount-wrapper input{
+  padding:14px 16px;
+  border-radius:12px;
+  border:2px solid rgba(0,0,0,0.15);
+  font-weight:700;
+  font-size:18px;
+  text-align:right; /* rata kanan untuk mata uang */
+  width:180px;
+  max-width:100%;
+  transition:0.3s;
+  outline:none;
+}
 .amount-wrapper input:focus{border-color:var(--accent); box-shadow:0 0 14px rgba(12,182,222,0.5);}
-.amount-wrapper label{position:absolute;top:-10px;left:0;right:0;margin:auto;color:var(--muted);font-size:13px;pointer-events:none;font-weight:600;text-align:center;}
+.amount-wrapper label{
+  position:absolute;
+  top:-18px; /* naikkan label */
+  left:0; right:0;
+  margin:auto;
+  color:var(--muted);
+  font-size:13px;
+  pointer-events:none;
+  font-weight:600;
+  text-align:center;
+}
 .products{max-width:960px;margin:40px auto;padding:0 14px;text-align:center;}
 .products h2{font-size:28px;margin-bottom:30px;color:var(--background);}
 .products .highlight{background:linear-gradient(90deg,var(--accent),var(--button));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.swing-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;gap:20px;flex-wrap:wrap;border-radius:14px;background: rgba(255,255,255,0.05);padding:16px;transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.8s;opacity:0;}
+.swing-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px;gap:16px;flex-wrap:wrap;border-radius:14px;background: rgba(255,255,255,0.05);padding:16px;transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.8s;opacity:0;}
 .swing-row.show{opacity:1;}
 .swing-row:hover{transform: scale(1.03); box-shadow:0 10px 24px rgba(0,0,0,0.25);}
-.swing-row img{flex:1 1 300px; max-width:360px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);}
-.swing-row .description{flex:1 1 300px;text-align:left;color:var(--background);}
+.swing-row img{flex:1 1 280px; max-width:100%; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+.swing-row .description{flex:1 1 280px;text-align:left;color:var(--background);}
 .swing-row h3{font-size:20px;margin-bottom:8px;color:var(--accent);}
 .swing-row p{font-size:14px;line-height:1.6;color:var(--background);}
 footer.site-footer{margin-top:40px;padding:24px 14px;background:#fff;color:var(--primary);text-align:center;border-top:2px solid var(--accent);}
@@ -51,8 +72,16 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
 @keyframes spin{to{transform:rotate(360deg);}}
 #backToTop{position:fixed; bottom:20px; right:20px; background:var(--button); color:#fff; border:none; border-radius:50%; width:50px; height:50px; font-size:24px; cursor:pointer; display:none; align-items:center; justify-content:center; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.3); transition:0.3s;}
 #backToTop:hover{background:var(--accent);}
-@media (max-width:1024px){.swing-row{flex-direction:column;text-align:center;}.swing-row .description{margin-bottom:12px;}.swing-row img{max-width:90%;}}
-@media (max-width:520px){ .card{padding:18px;margin:0 10px;} .amount-wrapper{flex-direction:column;gap:8px;}}
+@media (max-width:1024px){
+  .swing-row{flex-direction:column;text-align:center;gap:12px;}
+  .swing-row .description{text-align:center;margin-bottom:8px;}
+  .swing-row img{max-width:90%;}
+}
+@media (max-width:520px){
+  .card{padding:18px;margin:0 10px;}
+  .amount-wrapper{flex-direction:column;gap:8px;}
+  .amount-wrapper input{width:100%;}
+}
 </style>
 </head>
 <body>
@@ -67,7 +96,6 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
     Memuat data rekening...
   </div>
 
-  <!-- Card Rekening -->
   <article class="card" id="card">
     <img id="bankLogo" class="bank-logo" src="" alt="Logo Bank">
     <div class="rekening-info">
@@ -99,7 +127,6 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
     </div>
   </article>
 
-  <!-- Section Produk -->
   <section class="products">
     <h2>Produk <span class="highlight">Kami</span></h2>
 
@@ -163,13 +190,11 @@ const els = {
 
 els.yearEl.textContent = new Date().getFullYear();
 
-// Tooltip
 function showTooltip(el,msg){
   el.textContent=msg; el.style.opacity=1;
   setTimeout(()=>el.style.opacity=0,1500);
 }
 
-// Copy number / amount
 function onlyDigits(s){ return (s||'').toString().replace(/[^\d]/g,''); }
 function formatRp(n){ return n?('Rp '+Number(n).toLocaleString('id-ID')):''; }
 
@@ -200,33 +225,25 @@ els.copyAmount.addEventListener("click",()=>{
   }else alert("Masukkan jumlah transfer");
 });
 
-// Confetti effect
 function confetti(){
   confetti.create(null,{resize:true, useWorker:true})({particleCount:80, spread:120, origin:{y:0.6}});
 }
 
-// Input formatting
 els.amountInput.addEventListener("input", e=>{
   const digits=onlyDigits(e.target.value);
   e.target.value=digits?formatRp(digits):'';
 });
 
-// Pay Now
 els.payNowBtn.addEventListener("click",()=>{window.open("https://platform00.com/","_blank");});
-
-// Back to top
 window.addEventListener("scroll",()=>{els.backToTop.style.display=window.scrollY>300?"flex":"none";});
 els.backToTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
 
-// Animate products on scroll
 function animateRows(){els.swingRows.forEach(r=>{const rect=r.getBoundingClientRect(); if(rect.top<window.innerHeight*0.9) r.classList.add("show");});}
 window.addEventListener("scroll",animateRows);
 window.addEventListener("load",animateRows);
 
-// URL params
 function getUrlParams(){const p=new URLSearchParams(window.location.search); return {amount:p.get("amount")};}
 
-// Load data
 async function loadData(){
   const params=getUrlParams();
   try{
@@ -241,7 +258,8 @@ async function loadData(){
     els.acct.textContent=number;
     setBankLogoByName(bank);
     if(amount) els.amountInput.value=formatRp(onlyDigits(amount));
-  }catch(err){console.error(err);}finally{els.loading.style.display="none"; els.card.style.display="block"; els.card.classList.add("show");}
+  }catch(err){console.error(err);}
+  finally{els.loading.style.display="none"; els.card.style.display="block"; els.card.classList.add("show");}
 }
 loadData();
 </script>
