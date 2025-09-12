@@ -120,6 +120,7 @@ footer p { margin:4px 0; font-size:13px; color:var(--muted); }
     <button class="btn" id="payNowBtn">Bayar Sekarang</button>
   </div>
 
+  <!-- Produk Section -->
   <section class="products">
     <h2>Produk <span class="highlight">Kami</span></h2>
 
@@ -169,43 +170,39 @@ const copyAmountBtn = document.getElementById('copyAmountBtn');
 const acctTooltip = document.getElementById('acctTooltip');
 const amountTooltip = document.getElementById('amountTooltip');
 const amountInput = document.getElementById('amountInput');
-
-function showTooltip(el,msg){ el.textContent=msg; el.style.opacity=1; setTimeout(()=>el.style.opacity=0,1500); }
-function onlyDigits(s){ return (s||'').toString().replace(/[^\d]/g,''); }
-function formatRp(n){ return n?('Rp '+Number(n).toLocaleString('id-ID')):''; }
+const acctNumber = document.getElementById('acctNumber');
 
 copyAcctBtn.addEventListener('click',()=>{
-  navigator.clipboard.writeText(onlyDigits(document.getElementById('acctNumber').textContent));
+  navigator.clipboard.writeText(acctNumber.textContent.trim());
+  acctTooltip.style.opacity = 1;
+  setTimeout(()=>acctTooltip.style.opacity=0,1500);
   confettiEffect();
-  showTooltip(acctTooltip,'Disalin!');
 });
 
 copyAmountBtn.addEventListener('click',()=>{
-  const val = onlyDigits(amountInput.value);
-  if(!val){ alert("Masukkan jumlah transfer"); return; }
-  navigator.clipboard.writeText(val);
-  confettiEffect();
-  showTooltip(amountTooltip,'Disalin!');
+  if(amountInput.value) {
+    navigator.clipboard.writeText(amountInput.value.replace(/\D/g,''));
+    amountTooltip.style.opacity=1;
+    setTimeout(()=>amountTooltip.style.opacity=0,1500);
+    confettiEffect();
+  } else alert('Masukkan jumlah transfer terlebih dahulu');
 });
 
-// Format input
-amountInput.addEventListener('input',e=>{
-  const digits=onlyDigits(e.target.value);
-  e.target.value=digits?formatRp(digits):'';
+// Bayar Sekarang
+document.getElementById('payNowBtn').addEventListener('click',()=>{
+  window.location.href="https://platform00.com/";
 });
 
-// Pay Now
-document.getElementById('payNowBtn').addEventListener('click',()=>window.open("https://platform00.com/","_blank"));
-
-// Animate products on scroll
-const swingRows = document.querySelectorAll('.swing-row');
-function animateRows(){ swingRows.forEach(r=>{ if(r.getBoundingClientRect().top < window.innerHeight*0.9) r.classList.add('show'); }); }
-window.addEventListener('scroll',animateRows);
-window.addEventListener('load',animateRows);
-
-// URL param amount
+// URL Parameter untuk prefill jumlah transfer
 const params = new URLSearchParams(window.location.search);
-if(params.get('amount')) amountInput.value=formatRp(onlyDigits(params.get('amount')));
+if(params.get('amount')){
+  const val = params.get('amount').replace(/\D/g,'');
+  amountInput.value = new Intl.NumberFormat('id-ID',{style:'decimal'}).format(val);
+}
+
+// Swing row animation
+const swingRows = document.querySelectorAll('.swing-row');
+window.addEventListener('load',()=>{ swingRows.forEach((row,i)=>setTimeout(()=>row.classList.add('show'),i*200)); });
 </script>
 
 </body>
