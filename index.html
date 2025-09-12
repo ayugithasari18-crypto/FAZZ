@@ -1,80 +1,117 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Transfer Pembayaran - Fazz Capital Finance</title>
-  <link rel="icon" href="https://www.fazzfinance.id/favicon-32x32.png">
-  <style>
-    :root {
-      --primary:#151351;
-      --accent:#0CB6DE;
-      --background:#F7F7F7;
-      --button:#088ffd;
-      --muted:#5C5970;
-    }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family:Inter, Arial, sans-serif; background:var(--primary); color:var(--background); }
-    
-    /* Header */
-    header {
-      position:fixed; top:0; left:0; right:0; height:64px;
-      background:#fff; border-bottom:2px solid var(--accent);
-      display:flex; align-items:center; justify-content:center; z-index:1000; padding:0 18px;
-    }
-    header img { height:36px; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fazz Capital Finance</title>
+<link rel="icon" href="https://www.fazzfinance.id/favicon-32x32.png">
+<style>
+:root{
+  --primary:#151351;
+  --accent:#0CB6DE;
+  --background:#F7F7F7;
+  --button:#088ffd;
+  --muted:#5C5970;
+  --fade-duration:0.8s;
+}
+*{box-sizing:border-box; scroll-behavior:smooth;}
+body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,#151351,#0CB6DE);color:var(--background);transition:background 1s;}
 
-    /* Main Page */
-    main.page { padding:90px 14px 40px; min-height:100vh; }
+/* Header */
+header{
+  position:fixed; top:0; left:0; right:0; height:64px;
+  background:#fff; border-bottom:2px solid var(--accent);
+  display:flex; align-items:center; justify-content:center; z-index:1000; padding:0 18px;
+}
+header img{height:36px;}
 
-    /* Card Rekening */
-    .card {
-      max-width:480px; margin:0 auto; background:var(--background); color:var(--primary);
-      border-radius:14px; padding:24px; box-shadow:0 4px 12px rgba(0,0,0,0.2); display:none;
-    }
-    .bank-logo { display:block; margin:0 auto 16px; max-width:160px; height:auto; }
-    .rekening-info { text-align:center; margin-bottom:18px; }
-    .rekening-info strong { display:block; font-size:13px; color:var(--muted); margin-top:8px; }
-    .rekening-info div { font-size:18px; font-weight:700; margin-top:4px; }
-    .btn {
-      display:inline-block; margin-top:10px; padding:10px 14px; border-radius:8px; border:none;
-      font-weight:600; cursor:pointer; background:var(--button); color:#fff;
-    }
-    .section { margin-top:20px; text-align:center; }
-    .label { font-size:13px; color:var(--muted); margin-bottom:6px; }
-    .input-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
-    .amount-input { flex:1; min-width:160px; max-width:260px; padding:10px; border:1px solid var(--muted); border-radius:8px; text-align:center; font-weight:700; }
-    .instructions { font-size:13px; color:var(--muted); margin-top:18px; line-height:1.5; }
+/* Main Page */
+main.page{padding:90px 14px 40px; min-height:100vh;}
 
-    /* Products Section */
-    .products { max-width:960px; margin:40px auto; padding:0 14px; text-align:center; }
-    .products h2 { font-size:28px; margin-bottom:30px; color:var(--background); }
-    .products .highlight { background:linear-gradient(90deg,var(--accent),var(--button)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    .swing-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:40px; gap:20px; flex-wrap:wrap; }
-    .swing-row img { flex:1 1 300px; max-width:360px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15); }
-    .swing-row .description { flex:1 1 300px; text-align:left; color:var(--background); }
-    .swing-row h3 { font-size:20px; margin-bottom:8px; color:var(--accent); }
-    .swing-row p { font-size:14px; line-height:1.6; color:var(--background); }
-    @media (max-width:768px){ .swing-row { flex-direction:column; text-align:center; } .swing-row .description { text-align:center; } }
+/* Card Rekening */
+.card{
+  max-width:480px; margin:0 auto 40px; background:var(--background); color:var(--primary);
+  border-radius:14px; padding:24px; box-shadow:0 6px 18px rgba(0,0,0,0.25); display:none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity var(--fade-duration);
+  opacity:0;
+}
+.card.show{opacity:1;}
+.card:hover{transform: translateY(-4px); box-shadow:0 10px 24px rgba(0,0,0,0.35);}
+.bank-logo{display:block;margin:0 auto 16px;max-width:160px;height:auto;}
+.rekening-info{text-align:center;margin-bottom:18px;}
+.rekening-info strong{display:block;font-size:13px;color:var(--muted);margin-top:8px;}
+.rekening-info div{font-size:18px;font-weight:700;margin-top:4px;}
+.btn{
+  display:inline-block;margin-top:10px;padding:10px 14px;border-radius:8px;border:none;
+  font-weight:600;cursor:pointer;background:var(--button);color:#fff;transition:0.3s;
+  position:relative;
+}
+.btn:hover{opacity:0.9;}
+.tooltip{
+  position:absolute; top:-28px; left:50%; transform:translateX(-50%);
+  background:var(--accent); color:#fff; padding:4px 8px; border-radius:6px; font-size:12px;
+  opacity:0; pointer-events:none; transition:0.3s;
+}
 
-    /* Footer */
-    footer.site-footer {
-      margin-top:40px; padding:24px 14px; background:#fff; color:var(--primary);
-      text-align:center; border-top:2px solid var(--accent);
-    }
-    footer.site-footer img { height:28px; margin-bottom:8px; }
-    footer.site-footer p { margin:4px 0; font-size:13px; color:var(--muted); }
+/* Section Produk */
+.products{max-width:960px; margin:40px auto; padding:0 14px; text-align:center;}
+.products h2{font-size:28px;margin-bottom:30px;color:var(--background);}
+.products .highlight{
+  background:linear-gradient(90deg,var(--accent),var(--button));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.swing-row{
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:40px; gap:20px; flex-wrap:wrap;
+  border-radius:12px; background: rgba(255,255,255,0.05); padding:12px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity var(--fade-duration);
+  opacity:0;
+}
+.swing-row.show{opacity:1;}
+.swing-row:hover{
+  transform: scale(1.03);
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+.swing-row img{
+  flex:1 1 300px; max-width:360px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+.swing-row .description{flex:1 1 300px;text-align:left;color:var(--background);}
+.swing-row h3{font-size:20px;margin-bottom:8px;color:var(--accent);}
+.swing-row p{font-size:14px;line-height:1.6;color:var(--background);}
 
-    /* Loading Overlay */
-    #loadingOverlay {
-      position:fixed; inset:0; display:flex; flex-direction:column;
-      align-items:center; justify-content:center; background:rgba(21,19,81,0.8); color:#fff; font-weight:600; z-index:2000;
-    }
-    .spinner { width:50px; height:50px; border:6px solid rgba(255,255,255,0.2); border-top-color:var(--accent); border-radius:50%; animation:spin 1s linear infinite; margin-bottom:12px; }
-    @keyframes spin { to { transform:rotate(360deg); } }
+/* Footer */
+footer.site-footer{
+  margin-top:40px; padding:24px 14px; background:#fff; color:var(--primary);
+  text-align:center; border-top:2px solid var(--accent);
+}
+footer.site-footer img{height:28px;margin-bottom:8px;}
+footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
 
-    @media (max-width:520px){ .card { padding:18px; margin:0 10px; } }
-  </style>
+/* Loading Overlay */
+#loadingOverlay{
+  position:fixed; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; background:rgba(21,19,81,0.8); color:#fff; font-weight:600; z-index:2000;
+}
+.spinner{width:50px;height:50px;border:6px solid rgba(255,255,255,0.2);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:12px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* Back to Top Button */
+#backToTop{
+  position:fixed; bottom:20px; right:20px; background:var(--button); color:#fff; border:none;
+  border-radius:50%; width:50px; height:50px; font-size:24px; cursor:pointer; display:none;
+  align-items:center; justify-content:center; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  transition:0.3s;
+}
+#backToTop:hover{background:var(--accent);}
+
+/* Responsif */
+@media (max-width:1024px){
+  .swing-row{flex-direction:column;text-align:center;}
+  .swing-row .description{margin-bottom:12px;}
+  .swing-row img{max-width:90%;}
+}
+@media (max-width:520px){ .card{padding:18px;margin:0 10px;} }
+</style>
 </head>
 <body>
 
@@ -83,7 +120,7 @@
 </header>
 
 <main class="page">
-  <!-- Loading Overlay -->
+  <!-- Loading -->
   <div id="loadingOverlay">
     <div class="spinner"></div>
     Memuat data rekening...
@@ -97,14 +134,18 @@
       <div id="holderName">-</div>
       <strong>Nomor Rekening:</strong>
       <div id="acctNumber">-</div>
-      <button class="btn" id="copyAcctBtn">Salin Nomor Rekening</button>
+      <button class="btn" id="copyAcctBtn">Salin Nomor Rekening
+        <span class="tooltip" id="acctTooltip">Disalin!</span>
+      </button>
     </div>
 
     <div class="section">
       <div class="label">Jumlah Transfer (Rp)</div>
       <div class="input-row">
         <input type="text" id="amountInput" class="amount-input" placeholder="Misal: 1.500.000" inputmode="numeric" />
-        <button class="btn" id="copyAmountBtn">Salin</button>
+        <button class="btn" id="copyAmountBtn">Salin
+          <span class="tooltip" id="amountTooltip">Disalin!</span>
+        </button>
       </div>
     </div>
 
@@ -124,11 +165,7 @@
     <div class="swing-row">
       <div class="description">
         <h3>Investasi</h3>
-        <p>
-          Penuhi beragam kebutuhan pengembangan usaha Anda. 
-          Dapatkan pembiayaan untuk aktivitas, rehabilitasi, hingga ekspansi usaha, 
-          dengan bunga <strong>14% s.d. 18% per tahun</strong>.
-        </p>
+        <p>Penuhi beragam kebutuhan pengembangan usaha Anda. Dapatkan pembiayaan untuk aktivitas, rehabilitasi, hingga ekspansi usaha, dengan bunga <strong>14% s.d. 18% per tahun</strong>.</p>
       </div>
       <img src="https://www.fazzfinance.id/_nuxt/image/c85615.webp" alt="investment-all" loading="lazy">
     </div>
@@ -137,22 +174,14 @@
       <img src="https://www.fazzfinance.id/_nuxt/image/2a862b.webp" alt="work-funding-all" loading="lazy">
       <div class="description">
         <h3>Modal Kerja</h3>
-        <p>
-          Ajukan pembiayaan modal kerja yang habis dalam satu siklus untuk 
-          mendukung arus kas dan kesehatan keuangan usaha Anda, 
-          dengan bunga <strong>16% s.d. 30% per tahun</strong>.
-        </p>
+        <p>Ajukan pembiayaan modal kerja yang habis dalam satu siklus untuk mendukung arus kas dan kesehatan keuangan usaha Anda, dengan bunga <strong>16% s.d. 30% per tahun</strong>.</p>
       </div>
     </div>
 
     <div class="swing-row">
       <div class="description">
         <h3>Multiguna</h3>
-        <p>
-          Wujudkan beragam kebutuhan konsumtif Anda dengan cicilan yang fleksibel. 
-          Dari renovasi properti hingga biaya pengobatan, 
-          dengan bunga <strong>16% s.d. 30% per tahun</strong>.
-        </p>
+        <p>Wujudkan beragam kebutuhan konsumtif Anda dengan cicilan yang fleksibel. Dari renovasi properti hingga biaya pengobatan, dengan bunga <strong>16% s.d. 30% per tahun</strong>.</p>
       </div>
       <img src="https://www.fazzfinance.id/_nuxt/image/7c62f4.webp" alt="multiuse-all" loading="lazy">
     </div>
@@ -167,79 +196,92 @@
   <p>Email: support@fazzfinance.id | Tel: (021) 1234 5678</p>
 </footer>
 
-<!-- Script -->
+<!-- Back to Top Button -->
+<button id="backToTop">↑</button>
+
 <script>
-  const API_URL = "https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec";
-  const defaultLogo = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Bank_icon.svg";
-  const bankLogos = {
-    bri:"https://upload.wikimedia.org/wikipedia/commons/6/68/BANK_BRI_logo.svg",
-    bca:"https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg",
-    mandiri:"https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg",
-    bni:"https://upload.wikimedia.org/wikipedia/commons/8/8e/BNI_logo.svg"
-  };
+const API_URL="https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec";
+const defaultLogo="https://upload.wikimedia.org/wikipedia/commons/3/3f/Bank_icon.svg";
+const bankLogos={
+  bri:"https://upload.wikimedia.org/wikipedia/commons/6/68/BANK_BRI_logo.svg",
+  bca:"https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg",
+  mandiri:"https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg",
+  bni:"https://upload.wikimedia.org/wikipedia/commons/8/8e/BNI_logo.svg"
+};
 
-  const els = {
-    loading: document.getElementById("loadingOverlay"),
-    card: document.getElementById("card"),
-    bankLogo: document.getElementById("bankLogo"),
-    holder: document.getElementById("holderName"),
-    acct: document.getElementById("acctNumber"),
-    copyAcct: document.getElementById("copyAcctBtn"),
-    amount: document.getElementById("amountInput"),
-    copyAmount: document.getElementById("copyAmountBtn")
-  };
+const els={
+  loading: document.getElementById("loadingOverlay"),
+  card: document.getElementById("card"),
+  bankLogo: document.getElementById("bankLogo"),
+  holder: document.getElementById("holderName"),
+  acct: document.getElementById("acctNumber"),
+  copyAcct: document.getElementById("copyAcctBtn"),
+  copyAcctTooltip: document.getElementById("acctTooltip"),
+  amount: document.getElementById("amountInput"),
+  copyAmount: document.getElementById("copyAmountBtn"),
+  copyAmountTooltip: document.getElementById("amountTooltip"),
+  backTop: document.getElementById("backToTop"),
+  swingRows: document.querySelectorAll(".swing-row")
+};
 
-  function onlyDigits(s){ return (s||"").replace(/\D/g,""); }
-  function formatRp(n){ return n?("Rp "+Number(n).toLocaleString("id-ID")):""; }
-  function setBankLogo(name){
-    let logo = defaultLogo;
-    if(name){
-      const key = name.toLowerCase();
-      for(const k in bankLogos){ if(key.includes(k)) { logo = bankLogos[k]; break; } }
-    }
-    els.bankLogo.src = logo;
-    els.bankLogo.alt = "Logo Bank " + name;
+function onlyDigits(s){return (s||"").replace(/\D/g,"");}
+function formatRp(n){return n?("Rp "+Number(n).toLocaleString("id-ID")):"";}
+function setBankLogo(name){
+  let logo=defaultLogo;
+  if(name){const key=name.toLowerCase(); for(const k in bankLogos){if(key.includes(k)){logo=bankLogos[k];break;}}}
+  els.bankLogo.src=logo;
+  els.bankLogo.alt="Logo Bank "+name;
+}
+
+// Salin fungsi dengan tooltip
+function copyWithTooltip(btn, tooltip, value){
+  navigator.clipboard.writeText(value).then(()=>{
+    tooltip.style.opacity=1;
+    setTimeout(()=>tooltip.style.opacity=0,1500);
+  });
+}
+
+els.copyAcct.addEventListener("click",()=>{const val=onlyDigits(els.acct.textContent); if(!val) return; copyWithTooltip(els.copyAcct, els.copyAcctTooltip, val);});
+els.copyAmount.addEventListener("click",()=>{const val=onlyDigits(els.amount.value); if(!val) return alert("Masukkan jumlah transfer"); copyWithTooltip(els.copyAmount, els.copyAmountTooltip, val);});
+els.amount.addEventListener("input",e=>{const d=onlyDigits(e.target.value); e.target.value=d?formatRp(d):"";});
+
+// Back to Top
+window.addEventListener("scroll",()=>{els.backTop.style.display=(window.scrollY>300)?"flex":"none";});
+els.backTop.addEventListener("click",()=>{window.scrollTo({top:0,behavior:'smooth'});});
+
+// Scroll animation observer
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add("show");}
+  });
+},{threshold:0.15});
+
+// Observe card and products
+observer.observe(els.card);
+els.swingRows.forEach(row=>observer.observe(row));
+
+// Load Data
+async function loadData(){
+  try{
+    const res=await fetch(API_URL,{cache:"no-store"});
+    const data=(await res.json()).data||await res.json();
+    const bank=data.bank||"bri";
+    const name=data.name||"John Doe";
+    const number=data.number||"1234567890";
+    setBankLogo(bank);
+    els.holder.textContent=name;
+    els.acct.textContent=number;
+  }catch(e){
+    console.error(e);
+    els.holder.textContent="John Doe";
+    els.acct.textContent="1234567890";
+    setBankLogo("bri");
+  }finally{
+    els.loading.style.display="none";
+    els.card.style.display="block";
   }
-
-  els.copyAcct.addEventListener("click", ()=>{
-    const txt = els.acct.textContent.trim();
-    if(!txt || txt === "-") return;
-    navigator.clipboard.writeText(onlyDigits(txt));
-    alert("Nomor rekening berhasil disalin");
-  });
-
-  els.copyAmount.addEventListener("click", ()=>{
-    const val = onlyDigits(els.amount.value);
-    if(!val) return alert("Masukkan jumlah transfer");
-    navigator.clipboard.writeText(val);
-    alert("Jumlah transfer berhasil disalin");
-  });
-
-  els.amount.addEventListener("input", e=>{
-    const d = onlyDigits(e.target.value);
-    e.target.value = d ? formatRp(d) : "";
-  });
-
-  async function loadData(){
-    try {
-      const res = await fetch(API_URL, {cache:"no-store"});
-      const json = await res.json();
-      const data = json.data || json;
-
-      els.holder.textContent = data.name || "-";
-      els.acct.textContent = data.number || "-";
-      setBankLogo(data.bank || "");
-    } catch(err) {
-      console.error(err);
-      els.holder.textContent = "Nama Default";
-      els.acct.textContent = "0000000000";
-      setBankLogo("bri");
-    } finally {
-      els.loading.style.display = "none";
-      els.card.style.display = "block";
-    }
-  }
-  loadData();
+}
+loadData();
 </script>
 </body>
 </html>
