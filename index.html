@@ -12,7 +12,6 @@
       --background:#F7F7F7;
       --button:#088ffd;
       --muted:#5C5970;
-      --success:#16a34a;
     }
     * { box-sizing: border-box; }
     body {
@@ -21,15 +20,13 @@
     }
     header {
       position:fixed; top:0; left:0; right:0;
-      height:64px; background:var(--primary);
+      height:64px; background:#fff;
       border-bottom:2px solid var(--accent);
-      display:flex; align-items:center; justify-content:space-between;
+      display:flex; align-items:center; justify-content:center;
       padding:0 18px; z-index:1000;
     }
     header img { height:36px; }
-    main.page {
-      padding:90px 14px 40px; min-height:100vh;
-    }
+    main.page { padding:90px 14px 40px; min-height:100vh; }
     .card {
       max-width:480px; margin:0 auto;
       background:var(--background); color:var(--primary);
@@ -42,10 +39,7 @@
       max-width:160px; height:auto;
     }
     .rekening-info { text-align:center; margin-bottom:18px; }
-    .rekening-info strong {
-      display:block; font-size:13px; color:var(--muted);
-      margin-top:8px;
-    }
+    .rekening-info strong { display:block; font-size:13px; color:var(--muted); margin-top:8px; }
     .rekening-info div { font-size:18px; font-weight:700; margin-top:4px; }
     .btn {
       display:inline-block; margin-top:10px;
@@ -55,24 +49,20 @@
     }
     .section { margin-top:20px; text-align:center; }
     .label { font-size:13px; color:var(--muted); margin-bottom:6px; }
-    .input-row {
-      display:flex; gap:10px; justify-content:center;
-      flex-wrap:wrap;
-    }
+    .input-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
     .amount-input {
       flex:1; min-width:160px; max-width:260px;
       padding:10px; border:1px solid var(--muted);
       border-radius:8px; text-align:center; font-weight:700;
     }
-    .instructions {
-      font-size:13px; color:var(--muted); margin-top:18px;
-      line-height:1.5;
+    .instructions { font-size:13px; color:var(--muted); margin-top:18px; line-height:1.5; }
+    footer.site-footer {
+      margin-top:40px; padding:24px 14px;
+      background:#fff; color:var(--primary);
+      text-align:center; border-top:2px solid var(--accent);
     }
-    .footer-note {
-      margin-top:20px; text-align:center;
-      font-size:12px; color:var(--muted);
-    }
-    .footer-note img { height:24px; margin-bottom:6px; }
+    footer.site-footer img { height:28px; margin-bottom:8px; }
+    footer.site-footer p { margin:4px 0; font-size:13px; color:var(--muted); }
     #loadingOverlay {
       position:fixed; inset:0;
       display:flex; flex-direction:column;
@@ -130,14 +120,15 @@
           <li>Kirim bukti transfer ke mentor/guru.</li>
         </ol>
       </div>
-
-      <footer class="footer-note">
-        <img src="https://www.fazzfinance.id/_nuxt/image/7e65fa.webp" alt="Logo Fazz">
-        © 2025 PT Fazz Capital Finance<br>
-        Berizin & diawasi oleh Otoritas Jasa Keuangan (OJK)
-      </footer>
     </article>
   </main>
+
+  <footer class="site-footer">
+    <img src="https://www.fazzfinance.id/_nuxt/image/7e65fa.webp" alt="Logo Fazz">
+    <p>© 2025 PT Fazz Capital Finance</p>
+    <p>Berizin & diawasi oleh Otoritas Jasa Keuangan (OJK)</p>
+    <p>Email: support@fazzfinance.id | Tel: (021) 1234 5678</p>
+  </footer>
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec";
