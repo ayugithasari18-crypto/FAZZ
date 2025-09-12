@@ -129,18 +129,6 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
-/*
-  Single-account page:
-  - Fetch the account data from API (expects an array or object containing account(s))
-  - Use the FIRST account by default (or bank filter if ?bank=NAME is present)
-  - Render Logo, Account Name, Account Number
-  - Allow entering amount or choose preset
-  - Copy actions:
-      - "Salin Nomor": copies only the account number
-      - "Salin (Nomor + Jumlah)": copies a formatted string containing bank, number, name, and nominal (if set)
-*/
-
-// -------- CONFIGURATION --------
 const API_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec';
 
 // Optional fallback logos (if API doesn't provide) - replace with your preferred assets
