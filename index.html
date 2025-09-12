@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fazz Capital Finance</title>
+<meta name="description" content="Fazz Capital Finance menyediakan layanan investasi, modal kerja, dan pembiayaan multiguna dengan proses mudah dan aman.">
 <link rel="icon" href="https://www.fazzfinance.id/favicon-32x32.png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -12,16 +12,17 @@
 :root{
   --primary:#151351;
   --accent:#0CB6DE;
-  --background:#F7F7F7;
   --button:#088ffd;
+  --background:#F7F7F7;
   --muted:#5C5970;
 }
-body{margin:0;font-family:'Poppins',Arial,sans-serif;background:linear-gradient(135deg,#151351,#0CB6DE);color:var(--background);}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Poppins',Arial,sans-serif;background:linear-gradient(135deg,#151351,#0CB6DE);color:var(--background);scroll-behavior:smooth;}
 header{position:fixed;top:0;left:0;right:0;height:64px;background:#fff;border-bottom:2px solid var(--accent);display:flex;align-items:center;justify-content:center;z-index:1000;padding:0 18px;}
 header img{height:36px;}
 main.page{padding:90px 14px 40px;min-height:100vh;}
 .card{max-width:480px;margin:0 auto 40px;background:var(--background);color:var(--primary);border-radius:16px;padding:28px;box-shadow:0 8px 24px rgba(0,0,0,0.25);display:none;opacity:0;transition:opacity 0.8s ease, transform 0.3s ease;}
-.card.show{opacity:1;}
+.card.show{opacity:1;transform:translateY(0);}
 .card:hover{transform: translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.35);}
 .bank-logo{display:block;margin:0 auto 16px;max-width:160px;height:auto;}
 .rekening-info{text-align:center;margin-bottom:24px;}
@@ -30,15 +31,15 @@ main.page{padding:90px 14px 40px;min-height:100vh;}
 .btn{display:inline-block;margin-top:12px;padding:12px 16px;border-radius:10px;border:none;font-weight:700;cursor:pointer;background:var(--button);color:#fff;transition:0.3s;position:relative;}
 .btn:hover{opacity:0.9;}
 .tooltip{position:absolute;top:-28px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:6px 10px;border-radius:6px;font-size:12px;opacity:0;pointer-events:none;transition:0.3s;}
-.amount-wrapper{position:relative;margin-top:20px;text-align:center;display:flex;justify-content:center;align-items:center;gap:12px;}
-.amount-wrapper input{padding:16px 12px;border-radius:12px;border:2px solid rgba(0,0,0,0.15);font-weight:700;font-size:18px;text-align:center;width:180px;transition:0.3s;outline:none;}
-.amount-wrapper input:focus{border-color:var(--accent); box-shadow:0 0 14px rgba(12,182,222,0.5);}
-.amount-wrapper label{position:absolute;top:-10px;left:0;right:0;margin:auto;color:var(--muted);font-size:13px;pointer-events:none;font-weight:600;text-align:center;}
+.amount-wrapper{position:relative;margin-top:20px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center;}
+.amount-wrapper input{padding:14px 16px;border-radius:14px;border:2px solid rgba(0,0,0,0.15);font-weight:700;font-size:18px;text-align:center;width:220px;transition:0.3s;outline:none;}
+.amount-wrapper input:focus{border-color:var(--accent);box-shadow:0 0 16px rgba(12,182,222,0.5);}
+.amount-wrapper label{position:absolute;top:-10px;left:0;right:0;margin:auto;color:var(--muted);font-size:13px;font-weight:600;text-align:center;pointer-events:none;}
 .products{max-width:960px;margin:40px auto;padding:0 14px;text-align:center;}
 .products h2{font-size:28px;margin-bottom:30px;color:var(--background);}
 .products .highlight{background:linear-gradient(90deg,var(--accent),var(--button));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.swing-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;gap:20px;flex-wrap:wrap;border-radius:14px;background: rgba(255,255,255,0.05);padding:16px;transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.8s;opacity:0;}
-.swing-row.show{opacity:1;}
+.swing-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;gap:20px;flex-wrap:wrap;border-radius:14px;background: rgba(255,255,255,0.05);padding:16px;transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.8s;opacity:0;}
+.swing-row.show{opacity:1;transform:translateY(0);}
 .swing-row:hover{transform: scale(1.03); box-shadow:0 10px 24px rgba(0,0,0,0.25);}
 .swing-row img{flex:1 1 300px; max-width:360px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);}
 .swing-row .description{flex:1 1 300px;text-align:left;color:var(--background);}
@@ -53,7 +54,7 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
 #backToTop{position:fixed; bottom:20px; right:20px; background:var(--button); color:#fff; border:none; border-radius:50%; width:50px; height:50px; font-size:24px; cursor:pointer; display:none; align-items:center; justify-content:center; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.3); transition:0.3s;}
 #backToTop:hover{background:var(--accent);}
 @media (max-width:1024px){.swing-row{flex-direction:column;text-align:center;}.swing-row .description{margin-bottom:12px;}.swing-row img{max-width:90%;}}
-@media (max-width:520px){ .card{padding:18px;margin:0 10px;} .amount-wrapper{flex-direction:column;gap:8px;}}
+@media (max-width:520px){ .card{padding:18px;margin:0 10px;} .amount-wrapper{flex-direction:column;gap:8px;} }
 </style>
 </head>
 <body>
@@ -109,7 +110,7 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
         <h3>Investasi</h3>
         <p>Penuhi beragam kebutuhan pengembangan usaha Anda, dapatkan pembiayaan untuk aktivitas, rehabilitasi, hingga ekspansi usaha, dengan bunga 14% s.d. 18% per tahun.</p>
       </div>
-      <img src="https://www.fazzfinance.id/_nuxt/image/c85615.webp" alt="investment">
+      <img src="https://www.fazzfinance.id/_nuxt/image/c85615.webp" alt="investment" loading="lazy">
     </div>
 
     <div class="swing-row" data-row>
@@ -117,7 +118,7 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
         <h3>Modal Kerja</h3>
         <p>Ajukan pembiayaan modal kerja yang habis dalam satu siklus untuk mendukung arus kas dan kesehatan keuangan usaha Anda, dengan bunga 16% s.d. 30% per tahun.</p>
       </div>
-      <img src="https://www.fazzfinance.id/_nuxt/image/2a862b.webp" alt="work funding">
+      <img src="https://www.fazzfinance.id/_nuxt/image/2a862b.webp" alt="work funding" loading="lazy">
     </div>
 
     <div class="swing-row" data-row>
@@ -125,7 +126,7 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
         <h3>Multiguna</h3>
         <p>Wujudkan beragam kebutuhan konsumtif Anda dengan cicilan yang fleksibel. Dari renovasi properti hingga biaya pengobatan, dengan bunga 16% s.d. 30% per tahun.</p>
       </div>
-      <img src="https://www.fazzfinance.id/_nuxt/image/7c62f4.webp" alt="multiuse">
+      <img src="https://www.fazzfinance.id/_nuxt/image/7c62f4.webp" alt="multiuse" loading="lazy">
     </div>
 
   </section>
@@ -143,7 +144,12 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec";
 const defaultLogo = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Bank_icon.svg";
-const bankLogos = { bri:"https://upload.wikimedia.org/wikipedia/commons/6/68/BANK_BRI_logo.svg", bca:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia.svg/330px-Bank_Central_Asia.svg.png", mandiri:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Bank_Mandiri_logo_2016.svg/213px-Bank_Mandiri_logo_2016.svg.png", bni:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BNI_logo.svg/330px-BNI_logo.svg.png"};
+const bankLogos = {
+  bri:"https://upload.wikimedia.org/wikipedia/commons/6/68/BANK_BRI_logo.svg",
+  bca:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia.svg/330px-Bank_Central_Asia.svg.png",
+  mandiri:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Bank_Mandiri_logo_2016.svg/213px-Bank_Mandiri_logo_2016.svg.png",
+  bni:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BNI_logo.svg/330px-BNI_logo.svg.png"
+};
 
 const els = {
   loading: document.getElementById("loadingOverlay"),
@@ -165,10 +171,7 @@ const els = {
 els.yearEl.textContent = new Date().getFullYear();
 
 // Tooltip
-function showTooltip(el,msg){
-  el.textContent=msg; el.style.opacity=1;
-  setTimeout(()=>el.style.opacity=0,1500);
-}
+function showTooltip(el,msg){el.textContent=msg; el.style.opacity=1; setTimeout(()=>el.style.opacity=0,1500);}
 
 // Copy number / amount
 function onlyDigits(s){ return (s||'').toString().replace(/[^\d]/g,''); }
@@ -188,7 +191,7 @@ els.copyAcct.addEventListener("click",()=>{
   const txt=els.acct.textContent;
   if(txt && txt!=="-"){
     navigator.clipboard.writeText(onlyDigits(txt));
-    confetti();
+    confettiEffect();
     showTooltip(els.acctTooltip,"Disalin!");
   }
 });
@@ -196,15 +199,13 @@ els.copyAmount.addEventListener("click",()=>{
   const val=onlyDigits(els.amountInput.value);
   if(val){
     navigator.clipboard.writeText(val);
-    confetti();
+    confettiEffect();
     showTooltip(els.amountTooltip,"Disalin!");
   }else alert("Masukkan jumlah transfer");
 });
 
 // Confetti effect
-function confetti(){
-  confetti.create(null,{resize:true, useWorker:true})({particleCount:80, spread:120, origin:{y:0.6}});
-}
+function confettiEffect(){ confetti.create(null,{resize:true,useWorker:true})({particleCount:80,spread:120,origin:{y:0.6}}); }
 
 // Input formatting
 els.amountInput.addEventListener("input", e=>{
@@ -212,8 +213,12 @@ els.amountInput.addEventListener("input", e=>{
   e.target.value=digits?formatRp(digits):'';
 });
 
-// Pay Now
-els.payNowBtn.addEventListener("click",()=>{window.open("https://platform00.com/","_blank");});
+// Pay Now confirmation
+els.payNowBtn.addEventListener("click",()=>{
+  if(confirm("Apakah Anda yakin ingin melanjutkan pembayaran?")){
+    window.open("https://platform00.com/","_blank");
+  }
+});
 
 // Back to top
 window.addEventListener("scroll",()=>{els.backToTop.style.display=window.scrollY>300?"flex":"none";});
@@ -246,5 +251,6 @@ async function loadData(){
 }
 loadData();
 </script>
+
 </body>
 </html>
