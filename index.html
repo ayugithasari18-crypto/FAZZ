@@ -204,10 +204,7 @@ els.copyAmount.addEventListener("click",()=>{
   }else alert("Masukkan jumlah transfer");
 });
 
-// Confetti effect
-function confettiEffect(){ confetti.create(null,{resize:true,useWorker:true})({particleCount:80,spread:120,origin:{y:0.6}}); }
-
-// Input formatting
+  // Input formatting
 els.amountInput.addEventListener("input", e=>{
   const digits=onlyDigits(e.target.value);
   e.target.value=digits?formatRp(digits):'';
