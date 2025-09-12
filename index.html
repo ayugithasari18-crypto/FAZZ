@@ -59,7 +59,27 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
 <body>
 
 <header>
-  <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="Fazz Finance">
+  <nav id="navigation" style="display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:fixed;top:0;left:0;right:0;height:64px;background:#fff;border-bottom:2px solid #0CB6DE;z-index:1000;">
+    <a href="/" aria-current="page" class="logo mt-1 nuxt-link-exact-active current-page">
+      <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="Fazz Capital Finance" title="Fazz Capital Finance" style="height:36px;">
+    </a>
+    
+    <ul class="nav" style="display:flex;list-style:none;margin:0;padding:0;gap:20px;">
+      <li><a href="/" class="nuxt-link-exact-active current-page" style="text-decoration:none;color:#151351;font-weight:600;">Beranda</a></li>
+      <li><a href="/about-us" style="text-decoration:none;color:#151351;font-weight:600;">Tentang Kami</a></li>
+      <li><a href="/customer-support" style="text-decoration:none;color:#151351;font-weight:600;">Pengaduan Konsumen</a></li>
+      <li><a href="/blog" style="text-decoration:none;color:#151351;font-weight:600;">Blog</a></li>
+      <li><a href="/media" style="text-decoration:none;color:#151351;font-weight:600;">Media</a></li>
+    </ul>
+
+    <button class="contact-us" style="background:#088ffd;color:#fff;font-weight:700;padding:10px 16px;border-radius:8px;border:none;cursor:pointer;">Hubungi Kami</button>
+
+    <button class="hamburger-menu" style="background:none;border:none;cursor:pointer;display:none;">
+      <svg width="24" height="20" viewBox="0 0 24 20" xmlns="http://www.w3.org/2000/svg">
+        <path stroke="#191335" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round" d="M1.33301 18H22.6663M1.33301 2H22.6663M1.33301 10H22.6663"></path>
+      </svg>
+    </button>
+  </nav>
 </header>
 
 <main class="page">
