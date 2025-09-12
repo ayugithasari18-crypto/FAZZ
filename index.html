@@ -1,190 +1,266 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAZZ Capital Finance</title>
-  <link rel="icon" type="image/png" href="https://www.fazzfinance.id/favicon-32x32.png">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #F7F7F7;
-      color: #151351;
-    }
-    header {
-      background: #151351;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 { margin: 0; font-size: 1.5rem; }
-    .container {
-      max-width: 500px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    .bank-logo {
-      display: block;
-      max-width: 120px;
-      margin: 0 auto 20px;
-    }
-    .field {
-      margin-bottom: 18px;
-    }
-    .field label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 6px;
-    }
-    .field .value {
-      font-size: 1.1rem;
-      color: #088ffd;
-      word-break: break-word;
-    }
-    .input-group {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .input-group input {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-    .preset-btn {
-      padding: 8px 12px;
-      border: none;
-      border-radius: 6px;
-      background: #0CB6DE;
-      color: #fff;
-      cursor: pointer;
-      font-size: 13px;
-    }
-    .actions {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .copy-btn {
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      background: #088ffd;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .copy-btn:hover { background: #0CB6DE; }
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #151351;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 6px;
-      display: none;
-      z-index: 999;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Transfer Pembayaran - FAZZ Capital Finance</title>
+<link rel="icon" href="https://www.fazzfinance.id/favicon-32x32.png">
+<style>
+:root{
+  --card: rgba(255,255,255,0.15);
+  --text:#e6eef8;
+  --accent:#102e58;
+  --muted:rgba(230,238,248,0.7);
+  --success:#16a34a;
+  --danger:#d32f2f;
+}
+html,body{
+  height:100%;
+  margin:0;
+  font-family:Inter, Arial, sans-serif;
+  background:transparent; 
+  color:var(--text);
+}
+.page {
+  position: relative;
+  min-height:100vh;
+  padding:85px 14px 120px; /* beri ruang untuk footer */
+  overflow:hidden;
+}
+.page::before {
+  content:"";
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background-image:url('https://images.pexels.com/photos/4147341/pexels-photo-4147341.jpeg');
+  background-size:cover;
+  background-position:center;
+  z-index:-2;
+  filter: brightness(1.0);
+}
+.page::after {
+  content:"";
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  backdrop-filter: blur(3px);
+  background-color: rgba(255,255,255,0.05);
+  z-index:-1;
+  pointer-events:none;
+}
+
+header{
+  position:fixed;
+  top:0; left:0; right:0;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 18px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter: blur(6px);
+  z-index:2000;
+}
+.brand img{height:36px;}
+
+.card {
+  max-width:520px;
+  margin:40px auto;
+  background:var(--card);
+  border-radius:12px;
+  padding:24px;
+  backdrop-filter: blur(6px);
+  color: var(--text);
+  display:none;
+}
+.bank-logo{
+  display:block;
+  margin:8px auto 18px;
+  width:160px; height:auto;
+  object-fit:contain;
+}
+.rekening-info { text-align:center; margin-bottom: 18px; }
+.rekening-info strong { display:block; margin-top: 8px; color: var(--muted); font-size: 13px; }
+.rekening-info > div { font-weight: 700; font-size: 20px; margin-top: 4px; }
+.rekening-number { font-size: 20px; }
+.success { color: var(--success); margin-top: 6px; display: none; }
+.section { text-align:center; margin-bottom:18px; }
+.label{font-size:13px; color:var(--muted); margin-bottom:6px;}
+.input-row { display:flex; gap:10px; justify-content:center; margin-top:10px; }
+.amount-input { padding:10px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.08); width:100%; max-width:300px; text-align:center; font-weight:700;}
+.btn { display:inline-block; padding:10px 12px; background:var(--accent); color:#fff; border-radius:8px; border:none; cursor:pointer; font-weight:700; text-decoration:none;}
+.instructions { text-align:left; color:var(--muted); font-size:13px; margin-top:14px; line-height:1.4; }
+
+.footer {
+  background:rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  color:var(--muted);
+  padding:20px 14px;
+  font-size:12px;
+  text-align:center;
+  position:fixed;
+  bottom:0; left:0; right:0;
+}
+.footer img { max-height:32px; margin:6px; display:inline-block; vertical-align:middle; }
+
+#loadingOverlay{
+  position:fixed; inset:0;
+  display:flex;
+  align-items:center; justify-content:center;
+  gap:18px;
+  background: rgba(0,0,0,0.3);
+  z-index:1500;
+  color:var(--text);
+  font-weight:600;
+  font-size:16px;
+}
+.spinner { width:56px; height:56px; border-radius:50%; border:6px solid rgba(255,255,255,0.12); border-top-color:var(--accent); animation:spin 1s linear infinite; }
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media (max-width:520px){
+  .card{ margin:24px 18px; padding:18px;}
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>FAZZ Capital Finance - Detail Rekening</h1>
-  </header>
+<header>
+  <div class="brand">
+    <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="FAZZ Capital Finance" />
+  </div>
+</header>
 
-  <main class="container" id="account-card">
-    <!-- Konten rekening dari API -->
-  </main>
+<main class="page">
+<div id="loadingOverlay" role="status" aria-live="polite">
+  <div class="spinner" aria-hidden="true"></div>
+  Memuat data rekening...
+</div>
 
-  <div id="toast" class="toast"></div>
+<article class="card" id="card">
+  <img id="bankLogo" class="bank-logo" src="" alt="Logo Bank">
+  <div class="rekening-info">
+    <strong>Nama Rekening:</strong> <div id="holderName">-</div>
+    <strong>Nomor Rekening:</strong> <div class="rekening-number" id="acctNumber">-</div>
+    <button class="btn" id="copyAcctBtn">Salin Nomor Rekening</button>
+    <div class="success" id="copy-number-success">✅ Nomor rekening berhasil disalin</div>
+  </div>
+  <div class="section">
+    <div class="label">Jumlah Transfer (Rp)</div>
+    <div class="input-row">
+      <input type="text" id="amountInput" class="amount-input" placeholder="Misal: 1.500.000" inputmode="numeric" />
+      <button id="copyAmountBtn" class="btn">Salin</button>
+    </div>
+  </div>
+  <div class="instructions">
+    <ol>
+      <li>Salin nomor rekening, lalu transfer via online banking, mobile banking, atau ATM.</li>
+      <li>Kirim bukti transfer ke mentor/guru. Jika belum melakukan pembayaran 15–20 menit, refresh halaman.</li>
+    </ol>
+  </div>
+</article>
 
-  <script>
-    const API_ENDPOINT = "https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec";
+<div class="toast" id="toast" style="display:none; position:fixed; right:18px; bottom:80px; background:var(--success); color:#fff; padding:10px 14px; border-radius:8px;">
+  <span id="toastText">Berhasil disalin</span>
+</div>
+</main>
 
-    // Mapping logo bank
-    const bankLogos = {
-      "BCA": "https://upload.wikimedia.org/wikipedia/commons/5/5e/BCA_logo.svg",
-      "BRI": "https://upload.wikimedia.org/wikipedia/commons/6/69/Logo_BRI.png",
-      "Mandiri": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Bank_Mandiri_logo_2016.svg",
-      "BNI": "https://upload.wikimedia.org/wikipedia/commons/9/95/Logo_BNI.png",
-      "default": "https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png"
-    };
+<!-- Footer -->
+<footer class="footer">
+  <div>
+    <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="Fazz Capital Finance Logo">
+    <img src="https://www.fazzfinance.id/_nuxt/image/7e65fa.webp" alt="Fazz Finance Logo">
+  </div>
+  <p><strong>PT. Fazz Capital Finance</strong> • Jl. Jenderal Sudirman Kav. 52-53, SCBD, Jakarta Selatan 12190, Indonesia</p>
+  <p>PT. Fazz Capital Finance berizin dan diawasi oleh <strong>Otoritas Jasa Keuangan (OJK)</strong>.</p>
+  <p>© <span id="year"></span> PT. Fazz Capital Finance. All rights reserved.</p>
+</footer>
 
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 2500);
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec";
+const defaultLogo = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Bank_icon.svg";
+const bankLogos = {
+  bri:"https://upload.wikimedia.org/wikipedia/commons/6/68/BANK_BRI_logo.svg",
+  bca:"https://upload.wikimedia.org/wikipedia/commons/5/5e/BCA_logo.svg",
+  mandiri:"https://upload.wikimedia.org/wikipedia/commons/0/0d/Bank_Mandiri_logo_2016.svg",
+  bni:"https://upload.wikimedia.org/wikipedia/commons/9/95/Logo_BNI.png"
+};
+
+const els = {
+  loadingOverlay: document.getElementById('loadingOverlay'),
+  bankLogo: document.getElementById('bankLogo'),
+  holderName: document.getElementById('holderName'),
+  acctNumber: document.getElementById('acctNumber'),
+  copyAcctBtn: document.getElementById('copyAcctBtn'),
+  amountInput: document.getElementById('amountInput'),
+  copyAmountBtn: document.getElementById('copyAmountBtn'),
+  toast: document.getElementById('toast'),
+  toastText: document.getElementById('toastText'),
+  yearEl: document.getElementById('year'),
+  card: document.getElementById('card')
+};
+
+function showToast(msg){
+  els.toastText.textContent = msg;
+  els.toast.style.display='flex';
+  setTimeout(()=>els.toast.style.display='none',2500);
+}
+function onlyDigits(s){ return (s||'').toString().replace(/[^\d]/g,''); }
+function formatRp(n){ return n?('Rp '+Number(n).toLocaleString('id-ID')):''; }
+
+function setBankLogoByName(name){
+  let logo = defaultLogo;
+  if(name){
+    const key = name.toLowerCase();
+    for(const k in bankLogos){
+      if(key.includes(k)){ logo = bankLogos[k]; break; }
     }
+  }
+  els.bankLogo.src = logo;
+  els.bankLogo.alt = name ? `Logo Bank ${name}` : "Logo Bank";
+}
 
-    async function fetchAccount() {
-      try {
-        const res = await fetch(API_ENDPOINT);
-        const data = await res.json();
+els.copyAcctBtn.addEventListener('click',()=>{
+  const txt = els.acctNumber.textContent||'';
+  if(!txt||txt==='-') return;
+  navigator.clipboard.writeText(onlyDigits(txt)).then(()=>showToast("Nomor rekening berhasil disalin"));
+});
+els.copyAmountBtn.addEventListener('click',()=>{
+  const val = onlyDigits(els.amountInput.value);
+  if(!val) return alert('Masukkan jumlah transfer');
+  navigator.clipboard.writeText(val).then(()=>showToast("Jumlah transfer berhasil disalin"));
+});
+els.amountInput.addEventListener('input', e=>{
+  const digits = onlyDigits(e.target.value);
+  e.target.value = digits?formatRp(digits):'';
+});
 
-        if (data && data.name && data.number && data.bank) {
-          renderAccount(data);
-        } else {
-          document.getElementById('account-card').innerHTML = "<p>Data rekening tidak ditemukan.</p>";
-        }
-      } catch (e) {
-        console.error("Error fetching data:", e);
-      }
-    }
+els.yearEl.textContent = new Date().getFullYear();
 
-    function renderAccount(acc) {
-      const container = document.getElementById('account-card');
-      const logo = bankLogos[acc.bank] || bankLogos["default"];
+async function loadData(){
+  try{
+    const res = await fetch(API_URL,{cache:"no-store"});
+    const data = await res.json();
+    const acc = data.data || data;
 
-      container.innerHTML = `
-        <img src="${logo}" alt="${acc.bank}" class="bank-logo">
-        <div class="field">
-          <label>Nama Rekening</label>
-          <div class="value">${acc.name}</div>
-        </div>
-        <div class="field">
-          <label>Nomor Rekening</label>
-          <div class="value" id="acc-number">${acc.number}</div>
-        </div>
-        <div class="field">
-          <label>Jumlah Transfer</label>
-          <div class="input-group">
-            <input type="number" placeholder="Masukkan nominal" id="nominal">
-            <button class="preset-btn" data-value="50000">50k</button>
-            <button class="preset-btn" data-value="100000">100k</button>
-            <button class="preset-btn" data-value="150000">150k</button>
-          </div>
-        </div>
-        <div class="actions">
-          <button class="copy-btn" id="copyBtn">Salin</button>
-        </div>
-      `;
+    const bank = acc.bank || 'BRI';
+    const name = acc.name || 'John Doe';
+    const number = acc.number || '1234567890';
 
-      // preset nominal
-      container.querySelectorAll('.preset-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.getElementById('nominal').value = btn.dataset.value;
-        });
-      });
+    setBankLogoByName(bank);
+    els.holderName.textContent = name;
+    els.acctNumber.textContent = number;
 
-      // tombol salin
-      container.querySelector('#copyBtn').addEventListener('click', () => {
-        const nominal = document.getElementById('nominal').value;
-        let text = `${acc.bank} - ${acc.number} | ${acc.name}`;
-        if (nominal) text += ` — Nominal: Rp${Number(nominal).toLocaleString('id-ID')}`;
-        navigator.clipboard.writeText(text).then(() => {
-          showToast("Disalin: " + text);
-        });
-      });
-    }
+  }catch(err){
+    console.error(err);
+    els.holderName.textContent = 'John Doe';
+    els.acctNumber.textContent = '1234567890';
+    setBankLogoByName('BRI');
+  }finally{
+    setTimeout(()=>{
+      els.loadingOverlay.style.display='none';
+      els.card.style.display='block';
+    },250);
+  }
+}
 
-    fetchAccount();
-  </script>
+loadData();
+</script>
 </body>
 </html>
