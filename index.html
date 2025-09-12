@@ -30,7 +30,14 @@ main.page{padding:90px 14px 40px;min-height:100vh;}
 .amount-wrapper{position:relative;margin-top:20px;text-align:center;display:flex;justify-content:center;align-items:center;gap:12px;}
 .amount-wrapper input{padding:14px 10px;border-radius:14px;border:2px solid rgba(0,0,0,0.15);font-weight:700;font-size:16px;text-align:center;width:180px;transition:0.3s;outline:none;}
 .amount-wrapper input:focus{border-color:var(--accent); box-shadow:0 0 14px rgba(12,182,222,0.5);}
-.amount-wrapper label{position:absolute;top:-8px;left:0;right:0;margin:auto;color:var(--muted);font-size:12px;pointer-events:none;font-weight:600;text-align:center;}
+..amount-wrapper label {
+  display: block;          /* pastikan berada di baris atas input */
+  margin-bottom: 12px;     /* jarak ke input */
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
 .products{max-width:950px;margin:30px auto;padding:3 14px;text-align:center;}
 .products h2{font-size:28px;margin-bottom:30px;color:var(--background);}
 .products .highlight{background:linear-gradient(90deg,var(--accent),var(--button));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
