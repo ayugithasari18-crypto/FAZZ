@@ -14,45 +14,273 @@
   --button:#088ffd;
   --muted:#5C5970;
 }
-body{margin:0;font-family:'Poppins',Arial,sans-serif;background:linear-gradient(135deg,#151351,#0CB6DE);color:var(--background);}
-header{position:fixed;top:0;left:0;right:0;height:64px;background:#fff;border-bottom:2px solid var(--accent);display:flex;align-items:center;justify-content:center;z-index:1000;padding:0 18px;}
+body{
+  margin:0;
+  font-family:'Poppins',Arial,sans-serif;
+  background:linear-gradient(135deg,#151351,#0CB6DE);
+  color:var(--background);
+}
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:64px;
+  background:#fff;
+  border-bottom:2px solid var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+  padding:0 18px;
+}
 header img{height:36px;}
-main.page{padding:90px 14px 40px;min-height:100vh;}
-.card{max-width:480px;margin:0 auto 40px;background:var(--background);color:var(--primary);border-radius:16px;padding:28px;box-shadow:0 8px 24px rgba(0,0,0,0.25);display:none;opacity:0;transition:opacity 0.8s ease, transform 0.3s ease;}
+
+main.page{
+  padding:90px 14px 40px;
+  min-height:100vh;
+}
+
+/* ================= Article Card ================= */
+.card{
+  max-width:600px;
+  margin:0 auto 40px;
+  background:var(--background);
+  color:var(--primary);
+  border-radius:20px;
+  padding:32px;
+  box-shadow:0 10px 28px rgba(0,0,0,0.25);
+  display:none;
+  opacity:0;
+  transition:opacity 0.8s ease, transform 0.3s ease;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px;
+  text-align:center;
+}
 .card.show{opacity:1;}
-.card:hover{transform: translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.35);}
-.bank-logo{display:block;margin:0 auto 16px;max-width:160px;height:auto;}
-.rekening-info{text-align:center;margin-bottom:24px;}
-.rekening-info strong{display:block;font-size:13px;color:var(--muted);margin-top:8px;}
-.rekening-info div{font-size:18px;font-weight:700;margin-top:4px;}
-.btn{display:inline-block;margin-top:12px;padding:12px 16px;border-radius:10px;border:none;font-weight:700;cursor:pointer;background:var(--button);color:#fff;transition:0.3s;position:relative;}
+.card:hover{transform: translateY(-4px); box-shadow:0 14px 34px rgba(0,0,0,0.35);}
+
+.bank-logo{
+  display:block;
+  margin:0 auto;
+  max-width:180px;
+  height:auto;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+.rekening-info{
+  display:grid;
+  gap:12px;
+  margin-top:16px;
+}
+
+.rekening-info strong{
+  display:block;
+  font-size:13px;
+  color:var(--muted);
+  margin-top:8px;
+}
+
+.rekening-info div{
+  font-size:20px;
+  font-weight:700;
+  margin-top:4px;
+}
+
+.amount-wrapper{
+  position:relative;
+  display:grid;
+  gap:12px;
+  justify-items:center;
+  margin-top:20px;
+}
+
+.amount-wrapper input{
+  padding:16px 12px;
+  border-radius:12px;
+  border:2px solid rgba(0,0,0,0.15);
+  font-weight:700;
+  font-size:18px;
+  text-align:center;
+  width:220px;
+  transition:0.3s;
+  outline:none;
+}
+.amount-wrapper input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 14px rgba(12,182,222,0.5);
+}
+.amount-wrapper label{
+  position:absolute;
+  top:-10px;
+  left:0;
+  right:0;
+  margin:auto;
+  color:var(--muted);
+  font-size:13px;
+  pointer-events:none;
+  font-weight:600;
+  text-align:center;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:12px;
+  padding:14px 20px;
+  border-radius:12px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+  background:var(--button);
+  color:#fff;
+  transition:0.3s;
+  position:relative;
+  width:100%;
+}
 .btn:hover{opacity:0.9;}
-.amount-wrapper{position:relative;margin-top:20px;text-align:center;display:flex;justify-content:center;align-items:center;gap:12px;}
-.amount-wrapper input{padding:16px 12px;border-radius:12px;border:2px solid rgba(0,0,0,0.15);font-weight:700;font-size:18px;text-align:center;width:180px;transition:0.3s;outline:none;}
-.amount-wrapper input:focus{border-color:var(--accent); box-shadow:0 0 14px rgba(12,182,222,0.5);}
-.amount-wrapper label{position:absolute;top:-10px;left:0;right:0;margin:auto;color:var(--muted);font-size:13px;pointer-events:none;font-weight:600;text-align:center;}
-.products{max-width:960px;margin:40px auto;padding:0 14px;text-align:center;}
-.products h2{font-size:28px;margin-bottom:30px;color:var(--background);}
-.products .highlight{background:linear-gradient(90deg,var(--accent),var(--button));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.swing-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;gap:20px;flex-wrap:wrap;border-radius:14px;background: rgba(255,255,255,0.05);padding:16px;transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.8s;opacity:0;}
+
+.tooltip{
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--accent);
+  color:#fff;
+  padding:10px 16px;
+  border-radius:8px;
+  font-size:14px;
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+  z-index:2000;
+}
+
+/* ================= Products ================= */
+.products{
+  max-width:960px;
+  margin:40px auto;
+  padding:0 14px;
+  text-align:center;
+}
+.products h2{
+  font-size:28px;
+  margin-bottom:30px;
+  color:var(--background);
+}
+.products .highlight{
+  background:linear-gradient(90deg,var(--accent),var(--button));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.swing-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:40px;
+  gap:20px;
+  flex-wrap:wrap;
+  border-radius:14px;
+  background: rgba(255,255,255,0.05);
+  padding:16px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.8s;
+  opacity:0;
+}
 .swing-row.show{opacity:1;}
-.swing-row:hover{transform: scale(1.03); box-shadow:0 10px 24px rgba(0,0,0,0.25);}
-.swing-row img{flex:1 1 300px; max-width:360px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);}
-.swing-row .description{flex:1 1 300px;text-align:left;color:var(--background);}
-.swing-row h3{font-size:20px;margin-bottom:8px;color:var(--accent);}
-.swing-row p{font-size:14px;line-height:1.6;color:var(--background);}
-footer.site-footer{margin-top:40px;padding:24px 14px;background:#fff;color:var(--primary);text-align:center;border-top:2px solid var(--accent);}
-footer.site-footer img{height:28px;margin:6px 0;}
+.swing-row:hover{
+  transform: scale(1.03);
+  box-shadow:0 10px 24px rgba(0,0,0,0.25);
+}
+.swing-row img{
+  flex:1 1 300px;
+  max-width:360px;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+.swing-row .description{
+  flex:1 1 300px;
+  text-align:left;
+  color:var(--background);
+}
+.swing-row h3{
+  font-size:20px;
+  margin-bottom:8px;
+  color:var(--accent);
+}
+.swing-row p{
+  font-size:14px;
+  line-height:1.6;
+  color:var(--background);
+}
+
+/* ================= Footer ================= */
+footer.site-footer{
+  margin-top:40px;
+  padding:24px 14px;
+  background:#fff;
+  color:var(--primary);
+  text-align:center;
+  border-top:2px solid var(--accent);
+}
+footer.site-footer img{height:36px; margin:6px 8px;}
 footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
-#loadingOverlay{position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(21,19,81,0.8); color:#fff; font-weight:600; z-index:2000;}
-.spinner{width:50px;height:50px;border:6px solid rgba(255,255,255,0.2);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:12px;}
+
+/* ================= Loading / Back to top ================= */
+#loadingOverlay{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:rgba(21,19,81,0.8);
+  color:#fff;
+  font-weight:600;
+  z-index:2000;
+}
+.spinner{
+  width:50px;
+  height:50px;
+  border:6px solid rgba(255,255,255,0.2);
+  border-top-color:var(--accent);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin-bottom:12px;
+}
 @keyframes spin{to{transform:rotate(360deg);}}
-#backToTop{position:fixed; bottom:20px; right:20px; background:var(--button); color:#fff; border:none; border-radius:50%; width:50px; height:50px; font-size:24px; cursor:pointer; display:none; align-items:center; justify-content:center; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.3); transition:0.3s;}
+
+#backToTop{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--button);
+  color:#fff;
+  border:none;
+  border-radius:50%;
+  width:50px;
+  height:50px;
+  font-size:24px;
+  cursor:pointer;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  transition:0.3s;
+}
 #backToTop:hover{background:var(--accent);}
-#toast{position:fixed;top:-80px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:16px 24px;border-radius:12px;font-weight:700;font-size:16px;opacity:0;pointer-events:none;transition:all 0.5s ease;z-index:3000;}
-#toast.show{top:50px;opacity:1;}
-@media (max-width:1024px){.swing-row{flex-direction:column;text-align:center;}.swing-row .description{margin-bottom:12px;}.swing-row img{max-width:90%;}}
-@media (max-width:520px){ .card{padding:18px;margin:0 10px;} .amount-wrapper{flex-direction:column;gap:8px;} }
+
+/* ================= Responsive ================= */
+@media (max-width:1024px){
+  .swing-row{flex-direction:column;text-align:center;}
+  .swing-row .description{margin-bottom:12px;}
+  .swing-row img{max-width:90%;}
+}
+@media (max-width:520px){
+  .card{padding:20px;margin:0 10px;}
+  .amount-wrapper{flex-direction:column;gap:8px;}
+}
 </style>
 </head>
 <body>
@@ -60,8 +288,6 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
 <header>
   <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="Fazz Finance">
 </header>
-
-<div id="toast"></div>
 
 <main class="page">
   <div id="loadingOverlay">
@@ -77,30 +303,19 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
       <div id="holderName">-</div>
       <strong>Nomor Rekening:</strong>
       <div id="acctNumber">-</div>
-      <button class="btn" id="copyAcctBtn">Salin Nomor Rekening</button>
     </div>
 
     <div class="amount-wrapper">
       <input type="text" id="amountInput" placeholder=" " inputmode="numeric" />
       <label for="amountInput">Jumlah Transfer (Rp)</label>
-      <button class="btn" id="copyAmountBtn">Salin</button>
     </div>
 
-    <button class="btn" id="payNowBtn" style="margin-top:16px;width:100%;">Bayar Sekarang</button>
-
-    <div class="instructions" style="margin-top:20px;">
-      <ol>
-        <li>Salin nomor rekening dan lakukan transfer via m-banking/ATM.</li>
-        <li>Masukkan jumlah transfer sesuai instruksi.</li>
-        <li>Kirim bukti transfer ke mentor/guru. Refresh halaman jika belum melakukan pembayaran 15–20 menit.</li>
-      </ol>
-    </div>
+    <button class="btn" id="paidBtn">Saya sudah membayarnya</button>
   </article>
 
   <!-- Section Produk -->
   <section class="products">
     <h2>Produk <span class="highlight">Kami</span></h2>
-
     <div class="swing-row" data-row>
       <div class="description">
         <h3>Investasi</h3>
@@ -108,7 +323,6 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
       </div>
       <img src="https://www.fazzfinance.id/_nuxt/image/c85615.webp" alt="investment">
     </div>
-
     <div class="swing-row" data-row>
       <div class="description">
         <h3>Modal Kerja</h3>
@@ -116,7 +330,6 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
       </div>
       <img src="https://www.fazzfinance.id/_nuxt/image/2a862b.webp" alt="work funding">
     </div>
-
     <div class="swing-row" data-row>
       <div class="description">
         <h3>Multiguna</h3>
@@ -124,7 +337,6 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
       </div>
       <img src="https://www.fazzfinance.id/_nuxt/image/7c62f4.webp" alt="multiuse">
     </div>
-
   </section>
 </main>
 
@@ -132,26 +344,18 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
   <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="Fazz Finance">
   <p>PT. Fazz Capital Finance</p>
   <p>Berizin dan Diawasi oleh Otoritas Jasa Keuangan</p>
-  <p>Menara Prima Lt 10</p>
-  <p>Jl. DR. Ide Anak Agung Gde Agung No.2, RT.5/RW.2</p>
-  <p>Kuningan Timur, Setiabudi</p>
-  <p>Jakarta Selatan 12950</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/OJK_Logo.png" alt="OJK Logo" style="height:40px;margin:6px 0;">
-  <img src="https://www.fazzfinance.id/_nuxt/image/7e65fa.webp" alt="LAPS SJK" style="height:40px;margin:6px 0;">
-  <p>© <span id="year"></span> PT Fazz Capital Finance</p>
+  <p>Menara Prima Lt 10, Jl. DR. Ide Anak Agung Gde Agung No.2, RT.5/RW.2</p>
+  <p>Kuningan Timur, Setiabudi, Jakarta Selatan 12950</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/OJK_Logo.png" alt="OJK Logo">
 </footer>
 
+<div class="tooltip" id="amountTooltip">Jumlah Transfer Disalin!</div>
 <button id="backToTop">&#8679;</button>
 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec";
 const defaultLogo = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Bank_icon.svg";
-const bankLogos = {
-  bri:"https://upload.wikimedia.org/wikipedia/commons/6/68/BANK_BRI_logo.svg",
-  bca:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia.svg/330px-Bank_Central_Asia.svg.png",
-  mandiri:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Bank_Mandiri_logo_2016.svg/213px-Bank_Mandiri_logo_2016.svg.png",
-  bni:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BNI_logo.svg/330px-BNI_logo.svg.png"
-};
+const bankLogos = { bri:"https://upload.wikimedia.org/wikipedia/commons/6/68/BANK_BRI_logo.svg", bca:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia.svg/330px-Bank_Central_Asia.svg.png", mandiri:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Bank_Mandiri_logo_2016.svg/213px-Bank_Mandiri_logo_2016.svg.png", bni:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BNI_logo.svg/330px-BNI_logo.svg.png"};
 
 const els = {
   loading: document.getElementById("loadingOverlay"),
@@ -159,26 +363,26 @@ const els = {
   bankLogo: document.getElementById("bankLogo"),
   holder: document.getElementById("holderName"),
   acct: document.getElementById("acctNumber"),
-  copyAcct: document.getElementById("copyAcctBtn"),
   amountInput: document.getElementById("amountInput"),
-  copyAmount: document.getElementById("copyAmountBtn"),
-  payNowBtn: document.getElementById("payNowBtn"),
-  yearEl: document.getElementById("year"),
-  swingRows: document.querySelectorAll(".swing-row"),
-  toast: document.getElementById("toast"),
+  paidBtn: document.getElementById("paidBtn"),
+  tooltip: document.getElementById("amountTooltip"),
+  backToTop: document.getElementById("backToTop"),
+  swingRows: document.querySelectorAll(".swing-row")
 };
 
-els.yearEl.textContent = new Date().getFullYear();
-
-function showToast(message){
-  els.toast.textContent = message;
-  els.toast.classList.add("show");
-  setTimeout(()=>els.toast.classList.remove("show"),2000);
+// Tooltip popup
+function showTooltip(msg){
+  const el = els.tooltip;
+  el.textContent = msg;
+  el.style.opacity = 1;
+  setTimeout(()=>el.style.opacity=0,1500);
 }
 
-function onlyDigits(s){ return (s||'').toString().replace(/[^\d]/g,''); }
+// Format Rupiah
+function onlyDigits(s){return (s||'').toString().replace(/[^\d]/g,'');}
 function formatRp(n){ return n?('Rp '+Number(n).toLocaleString('id-ID')):''; }
 
+// Set Bank Logo
 function setBankLogoByName(name){
   let logo = defaultLogo;
   if(name){
@@ -189,58 +393,47 @@ function setBankLogoByName(name){
   els.bankLogo.alt=`Logo Bank ${name}`;
 }
 
-els.copyAcct.addEventListener("click",()=>{
-  const txt=els.acct.textContent;
-  if(txt && txt!=="-"){
-    navigator.clipboard.writeText(onlyDigits(txt));
-    showToast("Nomor rekening disalin!");
-  }
-});
-
-els.copyAmount.addEventListener("click",()=>{
-  const val=onlyDigits(els.amountInput.value);
+// Paid button
+els.paidBtn.addEventListener("click", ()=>{
+  const val = onlyDigits(els.amountInput.value);
   if(val){
-    navigator.clipboard.writeText(val);
-    showToast("Jumlah transfer disalin: " + formatRp(val));
-  }else{
-    showToast("Masukkan jumlah transfer terlebih dahulu!");
+    showTooltip(`Jumlah Transfer: ${formatRp(val)}`);
+  } else {
+    showTooltip("Masukkan jumlah transfer");
   }
 });
 
-els.amountInput.addEventListener("input", e=>{
-  const digits=onlyDigits(e.target.value);
-  e.target.value=digits?formatRp(digits):'';
-});
+// Back to top
+window.addEventListener("scroll",()=>{els.backToTop.style.display=window.scrollY>300?"flex":"none";});
+els.backToTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
 
-els.payNowBtn.addEventListener("click",()=>{window.open("https://platform00.com/","_blank");});
-
-const backToTop = document.getElementById("backToTop");
-window.addEventListener("scroll",()=>{backToTop.style.display=window.scrollY>300?"flex":"none";});
-backToTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
-
+// Animate products on scroll
 function animateRows(){els.swingRows.forEach(r=>{const rect=r.getBoundingClientRect(); if(rect.top<window.innerHeight*0.9) r.classList.add("show");});}
 window.addEventListener("scroll",animateRows);
 window.addEventListener("load",animateRows);
 
+// URL params
 function getUrlParams(){const p=new URLSearchParams(window.location.search); return {amount:p.get("amount")};}
 
+// Load data
 async function loadData(){
   const params=getUrlParams();
   try{
-    const res=await fetch(API_URL,{cache:"no-store"});
-    const json=await res.json();
-    const data=json.data||json;
-    const name=data.name||"John Doe";
-    const number=data.number||"1234567890";
-    const bank=data.bank||"bri";
-    const amount=params.amount||'';
+    const res = await fetch(API_URL,{cache:"no-store"});
+    const json = await res.json();
+    const data = json.data||json;
+    const name = data.name||"John Doe";
+    const number = data.number||"1234567890";
+    const bank = data.bank||"bri";
+    const amount = params.amount||'';
     els.holder.textContent=name;
     els.acct.textContent=number;
     setBankLogoByName(bank);
     if(amount) els.amountInput.value=formatRp(onlyDigits(amount));
-  }catch(err){console.error(err);}finally{
-    els.loading.style.display="none"; 
-    els.card.style.display="block"; 
+  }catch(err){console.error(err);}
+  finally{
+    els.loading.style.display="none";
+    els.card.style.display="grid";
     els.card.classList.add("show");
   }
 }
