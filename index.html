@@ -1,359 +1,237 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#151351" />
-  <title>FAZZ Capital Finance — Salin Rekening</title>
-  <!-- Favicon (as requested) -->
-  <link rel="icon" type="image/png" href="https://www.fazzfinance.id/favicon-32x32.png" />
-
-  <!-- Color palette: #151351 (dark), #0CB6DE (accent), #F7F7F7 (bg), #088ffd (accent2), #5C5970 (muted) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAZZ Capital Finance</title>
+  <link rel="icon" type="image/png" href="https://www.fazzfinance.id/favicon-32x32.png">
   <style>
-    :root{
-      --primary:#151351;
-      --accent:#0CB6DE;
-      --accent2:#088ffd;
-      --bg:#F7F7F7;
-      --muted:#5C5970;
-      --radius:12px;
-      --glass: rgba(255,255,255,0.04);
-      --card-shadow: 0 6px 18px rgba(21,19,81,0.12);
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #F7F7F7;
+      color: #151351;
     }
-
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#ffffff 60%);color:var(--primary)}
-
-    header{
-      background:var(--primary);
-      color:white;
-      padding:18px 20px;
+    header {
+      background: #151351;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 { margin: 0; font-size: 1.5rem; }
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 15px;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .bank-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bank-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+    .account-number {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #088ffd;
+    }
+    .input-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .input-group input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .preset-btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      background: #0CB6DE;
+      color: #fff;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    button.copy-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #088ffd;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button.copy-btn:hover {
+      background: #0CB6DE;
+    }
+    footer {
+      background:#151351;
+      color:#F7F7F7;
+      padding:40px 20px;
+      font-family:sans-serif;
+      margin-top: 40px;
+    }
+    footer .footer-content {
+      max-width:1200px;
+      margin:auto;
       display:flex;
-      gap:12px;
+      flex-wrap:wrap;
+      justify-content:space-between;
       align-items:center;
-      box-shadow: 0 4px 24px rgba(5,5,20,0.12);
+      gap:20px;
     }
-    .brand{display:flex;gap:12px;align-items:center}
-    .brand img{width:36px;height:36px;border-radius:6px}
-    .brand h1{font-size:18px;margin:0;letter-spacing:0.2px}
-    .brand p{margin:0;font-size:12px;color:rgba(255,255,255,0.85)}
-
-    main{max-width:980px;margin:22px auto;padding:0 20px}
-
-    .controls{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px}
-    .controls .left{display:flex;gap:8px;align-items:center}
-    .btn{background:var(--accent);border:none;color:white;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600;display:inline-flex;gap:8px;align-items:center}
-    .btn:active{transform:translateY(1px)}
-    .muted{color:var(--muted);font-size:13px}
-
-    /* Grid of account cards */
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-
-    .card{
-      background:linear-gradient(180deg,white, #fbfdff);
-      border-radius:var(--radius);
-      padding:14px;
-      box-shadow:var(--card-shadow);
-      display:flex;gap:12px;align-items:center;transition:transform .12s ease;border:1px solid rgba(9,10,32,0.03)
+    footer img {
+      max-height: 45px;
+      margin-bottom: 10px;
     }
-    .card:focus-within, .card:hover{transform:translateY(-4px)}
-
-    .logo-wrap{width:64px;height:64px;border-radius:10px;background:var(--glass);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .logo-wrap img{max-width:90%;max-height:90%;object-fit:contain}
-    .logo-fallback{display:none;align-items:center;justify-content:center;font-weight:700;color:var(--primary);background:linear-gradient(180deg,var(--bg),#fff);width:52px;height:52px;border-radius:8px}
-
-    .info{flex:1;min-width:0}
-    .bank{font-weight:700;color:var(--primary);font-size:15px;display:flex;align-items:center;gap:8px}
-    .name{font-size:13px;color:var(--muted);margin-top:6px}
-    .number{font-family:monospace;font-size:16px;margin-top:8px;display:flex;gap:8px;align-items:center}
-
-    .copy-btn{margin-left:auto;background:transparent;border:1px solid rgba(0,0,0,0.06);padding:8px 10px;border-radius:8px;cursor:pointer}
-
-    /* Toast */
-    .toast{position:fixed;right:18px;bottom:18px;background:var(--primary);color:white;padding:10px 14px;border-radius:10px;box-shadow:0 10px 30px rgba(5,5,20,0.28);display:flex;align-items:center;gap:8px}
-
-    /* Loading skeleton */
-    .skeleton{background:linear-gradient(90deg,#eee,#f6f6f6,#eee);height:12px;border-radius:6px}
-    .skeleton.logo{width:64px;height:64px;border-radius:10px}
-    .skeleton.line{width:100%;height:10px;margin:6px 0;border-radius:6px}
-
-    /* Responsive */
-    @media (max-width:540px){
-      header{padding:12px}
-      .brand h1{font-size:15px}
-      .logo-wrap{width:56px;height:56px}
-      .number{font-size:14px}
+    footer p {
+      margin: 0;
     }
-
-    /* Accessibility: focus styles */
-    button:focus{outline:3px solid rgba(12,182,222,0.18);outline-offset:2px}
+    footer .copyright {
+      margin-top:30px;
+      text-align:center;
+      font-size:13px;
+      color:#ccc;
+      border-top:1px solid rgba(255,255,255,0.1);
+      padding-top:15px;
+    }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #151351;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      display: none;
+      z-index: 999;
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="brand">
-      <img src="https://www.fazzfinance.id/favicon-32x32.png" alt="FAZZ Logo" />
-      <div>
-        <h1>FAZZ Capital Finance</h1>
-        <p class="muted">Salin &amp; bagikan detail rekening dengan cepat</p>
-      </div>
-    </div>
+    <h1>FAZZ Capital Finance - Informasi Rekening</h1>
   </header>
+  <main class="container" id="accounts"></main>
 
-  <main>
-    <div class="controls">
-      <div class="left">
-        <button class="btn" id="refreshBtn" title="Muat ulang daftar rekening">🔄 Muat ulang</button>
-        <div class="muted" id="status">Menunggu pemuatan...</div>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div>
+        <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="Fazz Capital Finance Logo">
+        <img src="https://www.fazzfinance.id/_nuxt/image/7e65fa.webp" alt="Fazz Finance Alt Logo" style="max-height:40px;">
       </div>
       <div>
-        <label for="filterBank" class="muted">Filter bank</label>
-        <select id="filterBank" aria-label="Filter bank">
-          <option value="">Semua bank</option>
-          <option>BRI</option>
-          <option>BCA</option>
-          <option>Mandiri</option>
-          <option>BNI</option>
-        </select>
+        <p><strong>PT. Fazz Capital Finance</strong><br>
+          Jl. Jenderal Sudirman Kav. 52-53<br>
+          SCBD, Jakarta Selatan 12190, Indonesia</p>
+        <p style="margin-top:10px; font-size:13px; color:#ccc;">
+          PT. Fazz Capital Finance berizin dan diawasi oleh <strong>Otoritas Jasa Keuangan (OJK)</strong>.
+        </p>
       </div>
     </div>
+    <div class="copyright">
+      © 2025 PT. Fazz Capital Finance. All rights reserved.
+    </div>
+  </footer>
 
-    <section id="accounts" class="grid" aria-live="polite" aria-busy="false">
-      <!-- Account cards will be inserted here -->
-    </section>
-  </main>
-
-  <!-- Live region for accessibility (announcements) -->
-  <div id="liveAnnounce" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-live="polite"></div>
-
-  <!-- Toast container -->
-  <div id="toast" style="display:none" role="status" aria-live="polite" class="toast">✔️ Disalin ke clipboard</div>
+  <div id="toast" class="toast"></div>
 
   <script>
-    /************************************************************************
-     * FAZZ Capital Finance - Single-file front-end
-     * - Fetches account data from the provided Google Apps Script endpoint
-     * - Renders accessible account cards with copy-to-clipboard behavior
-     * - Easy to customize: change API_ENDPOINT below, or adjust logo mapping
-     ************************************************************************/
+    const API_ENDPOINT = "https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec";
 
-    // ========== CONFIGURATION ==========
-    // Replace this with your provided endpoint if needed.
-    const API_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec';
-
-    // Optional: provide a mapping of bank name -> default logo URL (if API doesn't provide one)
-    // You may replace these with your hosted images or CDN links.
-    const DEFAULT_LOGOS = {
-      'BCA': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BCA_logo.svg/1200px-BCA_logo.svg.png',
-      'BRI': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/BRI_logo.svg/1200px-BRI_logo.svg.png',
-      'Mandiri': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Mandiri_logo.svg/1200px-Mandiri_logo.svg.png',
-      'BNI': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Bank_Negara_Indonesia_logo.svg/1200px-Bank_Negara_Indonesia_logo.svg.png'
-    };
-
-    // ========== UTILS ==========
-    function $(s, el=document){return el.querySelector(s)}
-    function $all(s, el=document){return Array.from(el.querySelectorAll(s))}
-
-    // Accessible announcement
-    function announce(text){
-      const live = document.getElementById('liveAnnounce');
-      live.textContent = '';
-      setTimeout(()=> live.textContent = text, 50);
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 2500);
     }
 
-    // Simple toast
-    const toastEl = $('#toast');
-    let toastTimer = null;
-    function showToast(msg){
-      toastEl.textContent = '✔️ ' + msg;
-      toastEl.style.display = 'flex';
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(()=> toastEl.style.display = 'none', 2200);
-    }
-
-    // Copy with Clipboard API and graceful fallback
-    async function copyToClipboard(text){
-      try{
-        if(navigator.clipboard && navigator.clipboard.writeText){
-          await navigator.clipboard.writeText(text);
-        } else {
-          // fallback
-          const ta = document.createElement('textarea');
-          ta.value = text; document.body.appendChild(ta);
-          ta.select(); ta.setSelectionRange(0, 99999);
-          document.execCommand('copy');
-          ta.remove();
-        }
-        return true;
-      }catch(e){
-        console.error('Copy failed', e);
-        return false;
+    async function fetchAccounts() {
+      try {
+        const res = await fetch(API_ENDPOINT);
+        const data = await res.json();
+        renderAccounts(data);
+      } catch (e) {
+        console.error("Error fetching data:", e);
       }
     }
 
-    // Format account for copying (customizable)
-    function formatAccountForCopy(acc){
-      // Try to be flexible with API shapes. Expected common fields: bank, accountNumber, accountName, logoUrl
-      const bank = acc.bank || acc.bankName || acc.bank_name || '';
-      const number = acc.accountNumber || acc.account_number || acc.noRek || acc.rek || '';
-      const name = acc.accountName || acc.name || acc.account_holder || '';
-      const parts = [];
-      if(bank) parts.push(bank);
-      if(number) parts.push(number);
-      if(name) parts.push('| ' + name);
-      return parts.join(' - ');
-    }
-
-    // ========== RENDERING ==========
-    function renderSkeletons(){
-      const container = $('#accounts');
-      container.innerHTML = '';
-      for(let i=0;i<4;i++){
-        const card = document.createElement('div'); card.className='card';
+    function renderAccounts(accounts) {
+      const container = document.getElementById('accounts');
+      container.innerHTML = "";
+      accounts.forEach(acc => {
+        const card = document.createElement('div');
+        card.className = 'card';
         card.innerHTML = `
-          <div class="logo-wrap"><div class="skeleton logo"></div></div>
-          <div class="info">
-            <div class="skeleton line"></div>
-            <div class="skeleton line" style="width:70%"></div>
-            <div class="skeleton line" style="width:40%"></div>
+          <div class="bank-info">
+            <img class="bank-logo" src="${acc.logoUrl || ''}" alt="${acc.bank || 'Bank'}">
+            <div>
+              <div><strong>${acc.bank}</strong></div>
+              <div class="account-number">${acc.accountNumber}</div>
+              <div>${acc.accountName || ''}</div>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="number" placeholder="Masukkan nominal" id="nominal-${acc.accountNumber}">
+            <button class="preset-btn" data-value="50000">50k</button>
+            <button class="preset-btn" data-value="100000">100k</button>
+            <button class="preset-btn" data-value="150000">150k</button>
+          </div>
+          <div class="actions">
+            <button class="copy-btn" data-number="${acc.accountNumber}" data-bank="${acc.bank}" data-name="${acc.accountName || ''}">Salin</button>
           </div>
         `;
         container.appendChild(card);
-      }
+
+        // preset buttons
+        card.querySelectorAll('.preset-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const input = card.querySelector(`#nominal-${acc.accountNumber}`);
+            input.value = btn.dataset.value;
+          });
+        });
+
+        // copy button
+        card.querySelector('.copy-btn').addEventListener('click', () => {
+          const nominal = card.querySelector(`#nominal-${acc.accountNumber}`).value;
+          let text = `${acc.bank} - ${acc.accountNumber} | ${acc.accountName}`;
+          if (nominal) text += ` — Nominal: Rp${Number(nominal).toLocaleString('id-ID')}`;
+          navigator.clipboard.writeText(text).then(() => {
+            showToast("Disalin: " + text);
+          });
+        });
+      });
     }
 
-    // Build a card for each account
-    function buildCard(acc){
-      const bank = acc.bank || acc.bankName || acc.bank_name || '';
-      const number = acc.accountNumber || acc.account_number || acc.noRek || acc.rek || '';
-      const name = acc.accountName || acc.name || acc.account_holder || '';
-      const logoUrl = acc.logoUrl || acc.logo || acc.logo_url || '';
-
-      const card = document.createElement('article');
-      card.className = 'card';
-      card.tabIndex = 0;
-      card.innerHTML = `
-        <div class="logo-wrap">
-          <img alt="logo ${bank || ''}" />
-          <div class="logo-fallback" aria-hidden="true"></div>
-        </div>
-        <div class="info">
-          <div class="bank">${bank || '<span class="muted">Bank</span>'}</div>
-          <div class="name">${name || 'Nama rekening'}</div>
-          <div class="number"><code aria-label="nomor rekening">${number || '—'}</code></div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
-          <button class="btn copy-main" title="Salin nomor rekening">Salin</button>
-          <button class="copy-detail copy-btn" title="Salin (bank - nomor - nama)">Salin detail</button>
-        </div>
-      `;
-
-      // Logo handling: set img src or show fallback
-      const img = card.querySelector('img');
-      const fallback = card.querySelector('.logo-fallback');
-      fallback.textContent = (bank && bank.length<=6) ? bank : (bank ? bank.split(' ').map(w=>w[0]).join('').slice(0,3) : 'FAZ');
-
-      if(logoUrl){
-        img.src = logoUrl;
-        img.onload = ()=>{ img.style.display='block'; fallback.style.display='none'; };
-        img.onerror = ()=>{ img.style.display='none'; fallback.style.display='flex'; };
-      } else if(DEFAULT_LOGOS[bank]){
-        img.src = DEFAULT_LOGOS[bank];
-        img.onload = ()=>{ img.style.display='block'; fallback.style.display='none'; };
-        img.onerror = ()=>{ img.style.display='none'; fallback.style.display='flex'; };
-      } else {
-        img.style.display='none'; fallback.style.display='flex';
-      }
-
-      // Copy handlers
-      const copyMain = card.querySelector('.copy-main');
-      const copyDetail = card.querySelector('.copy-detail');
-
-      copyMain.addEventListener('click', async ()=>{
-        const ok = await copyToClipboard(number);
-        if(ok){
-          showToast('Nomor rekening disalin');
-          announce('Nomor rekening disalin ke clipboard');
-        } else {
-          showToast('Tidak dapat menyalin');
-        }
-      });
-
-      copyDetail.addEventListener('click', async ()=>{
-        const text = formatAccountForCopy(acc);
-        const ok = await copyToClipboard(text);
-        if(ok){ showToast('Detail rekening disalin'); announce('Detail rekening disalin ke clipboard'); }
-        else showToast('Tidak dapat menyalin');
-      });
-
-      // Keyboard: Enter on card triggers copy detail
-      card.addEventListener('keydown', (e)=>{
-        if(e.key === 'Enter'){
-          copyDetail.click();
-        }
-      });
-
-      return card;
-    }
-
-
-    // ========== FETCHING ==========
-    async function fetchAccounts(){
-      const accountsSection = $('#accounts');
-      accountsSection.setAttribute('aria-busy', 'true');
-      $('#status').textContent = 'Memuat daftar rekening...';
-      renderSkeletons();
-
-      try{
-        const res = await fetch(API_ENDPOINT, {cache:'no-store'});
-        if(!res.ok) throw new Error('HTTP ' + res.status);
-        const data = await res.json();
-
-        // API may return at top-level array or object like {data: [...]}
-        const accounts = Array.isArray(data) ? data : (Array.isArray(data.data) ? data.data : (data.accounts || []));
-
-        // Optional URL filter: ?bank=BNI
-        const params = new URLSearchParams(location.search);
-        const filter = (params.get('bank') || $('#filterBank').value || '').trim();
-
-        accountsSection.innerHTML = '';
-        if(accounts.length === 0){
-          accountsSection.innerHTML = '<div class="muted">Tidak ada data rekening yang ditemukan.</div>';
-        } else {
-          const filtered = filter ? accounts.filter(a => (a.bank||a.bankName||a.bank_name||'').toLowerCase().includes(filter.toLowerCase())) : accounts;
-          if(filtered.length === 0){ accountsSection.innerHTML = '<div class="muted">Tidak ada rekening cocok untuk filter tersebut.</div>'; }
-          else filtered.forEach(acc => accountsSection.appendChild(buildCard(acc)));
-        }
-
-        $('#status').textContent = `Menampilkan ${accounts.length} rekening`;
-      }catch(err){
-        console.error(err);
-        $('#accounts').innerHTML = '<div class="muted">Gagal memuat data. Periksa koneksi atau konfigurasi endpoint.</div>';
-        $('#status').textContent = 'Gagal memuat';
-      } finally{
-        accountsSection.setAttribute('aria-busy','false');
-      }
-    }
-
-    // ========== INITIALIZE ==========
-    document.addEventListener('DOMContentLoaded', ()=>{
-      // Wire up refresh button and filter
-      $('#refreshBtn').addEventListener('click', ()=>{ fetchAccounts(); });
-      $('#filterBank').addEventListener('change', ()=> fetchAccounts());
-
-      // If URL has bank=... pre-select
-      const params = new URLSearchParams(location.search);
-      const bankParam = params.get('bank');
-      if(bankParam){
-        const sel = $('#filterBank');
-        for(const opt of sel.options) if(opt.value.toLowerCase() === bankParam.toLowerCase()) sel.value = opt.value;
-      }
-
-      fetchAccounts();
-    });
-
-    // Helpful dev-note: if you see CORS error, publish the Google Apps Script as "Anyone, even anonymous" web app
+    fetchAccounts();
   </script>
 </body>
 </html>
