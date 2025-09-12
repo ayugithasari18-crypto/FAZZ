@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Transfer Pembayaran - FAZZ Capital Finance</title>
+<title>Transfer Pembayaran</title>
 <link rel="icon" href="https://www.fazzfinance.id/favicon-32x32.png">
 <style>
 :root{
-  --card: rgba(255,255,255,0.15);
-  --text:#e6eef8;
-  --accent:#102e58;
-  --muted:rgba(230,238,248,0.7);
+  --primary:#151351;
+  --accent:#0CB6DE;
+  --background:#F7F7F7;
+  --button:#088ffd;
+  --muted:#5C5970;
   --success:#16a34a;
   --danger:#d32f2f;
 }
@@ -18,33 +19,15 @@ html,body{
   height:100%;
   margin:0;
   font-family:Inter, Arial, sans-serif;
-  background:transparent; 
-  color:var(--text);
+  background:var(--primary);
+  color:var(--background);
 }
 .page {
   position: relative;
   min-height:100vh;
-  padding:85px 14px 120px; /* beri ruang untuk footer */
+  padding:85px 14px 45px;
   overflow:hidden;
-}
-.page::before {
-  content:"";
-  position:fixed;
-  top:0; left:0; right:0; bottom:0;
-  background-image:url('https://images.pexels.com/photos/4147341/pexels-photo-4147341.jpeg');
-  background-size:cover;
-  background-position:center;
-  z-index:-2;
-  filter: brightness(1.0);
-}
-.page::after {
-  content:"";
-  position:fixed;
-  top:0; left:0; right:0; bottom:0;
-  backdrop-filter: blur(3px);
-  background-color: rgba(255,255,255,0.05);
-  z-index:-1;
-  pointer-events:none;
+  background: var(--primary);
 }
 
 header{
@@ -55,8 +38,8 @@ header{
   align-items:center;
   justify-content:space-between;
   padding:10px 18px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter: blur(6px);
+  background:var(--primary);
+  border-bottom:2px solid var(--accent);
   z-index:2000;
 }
 .brand img{height:36px;}
@@ -64,11 +47,11 @@ header{
 .card {
   max-width:520px;
   margin:40px auto;
-  background:var(--card);
+  background:var(--background);
   border-radius:12px;
   padding:24px;
-  backdrop-filter: blur(6px);
-  color: var(--text);
+  color: var(--primary);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
   display:none;
 }
 .bank-logo{
@@ -85,34 +68,23 @@ header{
 .section { text-align:center; margin-bottom:18px; }
 .label{font-size:13px; color:var(--muted); margin-bottom:6px;}
 .input-row { display:flex; gap:10px; justify-content:center; margin-top:10px; }
-.amount-input { padding:10px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.08); width:100%; max-width:300px; text-align:center; font-weight:700;}
-.btn { display:inline-block; padding:10px 12px; background:var(--accent); color:#fff; border-radius:8px; border:none; cursor:pointer; font-weight:700; text-decoration:none;}
+.amount-input { padding:10px 12px; border-radius:8px; border:1px solid var(--muted); width:100%; max-width:300px; text-align:center; font-weight:700;}
+.btn { display:inline-block; padding:10px 12px; background:var(--button); color:#fff; border-radius:8px; border:none; cursor:pointer; font-weight:700; text-decoration:none;}
 .instructions { text-align:left; color:var(--muted); font-size:13px; margin-top:14px; line-height:1.4; }
-
-.footer {
-  background:rgba(0,0,0,0.4);
-  backdrop-filter: blur(4px);
-  color:var(--muted);
-  padding:20px 14px;
-  font-size:12px;
-  text-align:center;
-  position:fixed;
-  bottom:0; left:0; right:0;
-}
-.footer img { max-height:32px; margin:6px; display:inline-block; vertical-align:middle; }
+.footer-note { text-align:center; font-size:12px; color:var(--muted); margin-top:20px; }
 
 #loadingOverlay{
   position:fixed; inset:0;
   display:flex;
   align-items:center; justify-content:center;
   gap:18px;
-  background: rgba(0,0,0,0.3);
+  background: rgba(21,19,81,0.8);
   z-index:1500;
-  color:var(--text);
+  color:#fff;
   font-weight:600;
   font-size:16px;
 }
-.spinner { width:56px; height:56px; border-radius:50%; border:6px solid rgba(255,255,255,0.12); border-top-color:var(--accent); animation:spin 1s linear infinite; }
+.spinner { width:56px; height:56px; border-radius:50%; border:6px solid rgba(255,255,255,0.15); border-top-color:var(--accent); animation:spin 1s linear infinite; }
 @keyframes spin{to{transform:rotate(360deg)}}
 
 @media (max-width:520px){
@@ -123,7 +95,7 @@ header{
 <body>
 <header>
   <div class="brand">
-    <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="FAZZ Capital Finance" />
+    <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="FAZZ Finance" />
   </div>
 </header>
 
@@ -148,38 +120,33 @@ header{
       <button id="copyAmountBtn" class="btn">Salin</button>
     </div>
   </div>
+  <a id="confirmBtn" class="btn" href="#" target="_blank">Saya sudah membayarkannya</a>
   <div class="instructions">
     <ol>
       <li>Salin nomor rekening, lalu transfer via online banking, mobile banking, atau ATM.</li>
       <li>Kirim bukti transfer ke mentor/guru. Jika belum melakukan pembayaran 15–20 menit, refresh halaman.</li>
     </ol>
   </div>
+  <footer class="footer-note">
+    <img src="https://www.fazzfinance.id/_nuxt/image/7e65fa.webp" alt="Fazz Logo" style="height:24px; display:block; margin:0 auto 8px;">
+    © 2025 PT Fazz Capital Finance <br>
+    Berizin & diawasi oleh Otoritas Jasa Keuangan (OJK)
+  </footer>
 </article>
 
-<div class="toast" id="toast" style="display:none; position:fixed; right:18px; bottom:80px; background:var(--success); color:#fff; padding:10px 14px; border-radius:8px;">
+<div class="toast" id="toast" style="display:none; position:fixed; right:18px; bottom:18px; background:var(--success); color:#fff; padding:10px 14px; border-radius:8px;">
   <span id="toastText">Berhasil disalin</span>
 </div>
 </main>
-
-<!-- Footer -->
-<footer class="footer">
-  <div>
-    <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="Fazz Capital Finance Logo">
-    <img src="https://www.fazzfinance.id/_nuxt/image/7e65fa.webp" alt="Fazz Finance Logo">
-  </div>
-  <p><strong>PT. Fazz Capital Finance</strong> • Jl. Jenderal Sudirman Kav. 52-53, SCBD, Jakarta Selatan 12190, Indonesia</p>
-  <p>PT. Fazz Capital Finance berizin dan diawasi oleh <strong>Otoritas Jasa Keuangan (OJK)</strong>.</p>
-  <p>© <span id="year"></span> PT. Fazz Capital Finance. All rights reserved.</p>
-</footer>
 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbyo4cv-kHFZYlKpDfauCDYAfqZB0dX-7d0r6i5d6oz8qRVwNyCk2INWYE9FbOyzezvr/exec";
 const defaultLogo = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Bank_icon.svg";
 const bankLogos = {
   bri:"https://upload.wikimedia.org/wikipedia/commons/6/68/BANK_BRI_logo.svg",
-  bca:"https://upload.wikimedia.org/wikipedia/commons/5/5e/BCA_logo.svg",
-  mandiri:"https://upload.wikimedia.org/wikipedia/commons/0/0d/Bank_Mandiri_logo_2016.svg",
-  bni:"https://upload.wikimedia.org/wikipedia/commons/9/95/Logo_BNI.png"
+  bca:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia.svg/330px-Bank_Central_Asia.svg.png",
+  mandiri:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Bank_Mandiri_logo_2016.svg/213px-Bank_Mandiri_logo_2016.svg.png",
+  bni:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/BNI_logo.svg/330px-BNI_logo.svg.png"
 };
 
 const els = {
@@ -192,7 +159,6 @@ const els = {
   copyAmountBtn: document.getElementById('copyAmountBtn'),
   toast: document.getElementById('toast'),
   toastText: document.getElementById('toastText'),
-  yearEl: document.getElementById('year'),
   card: document.getElementById('card')
 };
 
@@ -219,29 +185,27 @@ function setBankLogoByName(name){
 els.copyAcctBtn.addEventListener('click',()=>{
   const txt = els.acctNumber.textContent||'';
   if(!txt||txt==='-') return;
-  navigator.clipboard.writeText(onlyDigits(txt)).then(()=>showToast("Nomor rekening berhasil disalin"));
+  navigator.clipboard.writeText(onlyDigits(txt)).then(()=>showToast("Berhasil menyalin nomor rekening"));
 });
 els.copyAmountBtn.addEventListener('click',()=>{
   const val = onlyDigits(els.amountInput.value);
   if(!val) return alert('Masukkan jumlah transfer');
-  navigator.clipboard.writeText(val).then(()=>showToast("Jumlah transfer berhasil disalin"));
+  navigator.clipboard.writeText(val).then(()=>showToast("Berhasil menyalin jumlah transfer"));
 });
 els.amountInput.addEventListener('input', e=>{
   const digits = onlyDigits(e.target.value);
   e.target.value = digits?formatRp(digits):'';
 });
 
-els.yearEl.textContent = new Date().getFullYear();
-
 async function loadData(){
   try{
     const res = await fetch(API_URL,{cache:"no-store"});
-    const data = await res.json();
-    const acc = data.data || data;
+    const json = await res.json();
+    const data = json.data || json;
 
-    const bank = acc.bank || 'BRI';
-    const name = acc.name || 'John Doe';
-    const number = acc.number || '1234567890';
+    const bank = data.bank || 'bri';
+    const name = data.name || 'John Doe';
+    const number = data.number || '1234567890';
 
     setBankLogoByName(bank);
     els.holderName.textContent = name;
@@ -251,7 +215,7 @@ async function loadData(){
     console.error(err);
     els.holderName.textContent = 'John Doe';
     els.acctNumber.textContent = '1234567890';
-    setBankLogoByName('BRI');
+    setBankLogoByName('bri');
   }finally{
     setTimeout(()=>{
       els.loadingOverlay.style.display='none';
