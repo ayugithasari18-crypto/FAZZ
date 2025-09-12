@@ -6,6 +6,7 @@
 <title>Fazz Capital Finance</title>
 <link rel="icon" href="https://www.fazzfinance.id/favicon-32x32.png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <style>
 :root{
   --primary:#151351;
@@ -28,12 +29,10 @@ main.page{padding:90px 14px 40px;min-height:100vh;}
 .btn{display:inline-block;margin-top:12px;padding:12px 16px;border-radius:10px;border:none;font-weight:700;cursor:pointer;background:var(--button);color:#fff;transition:0.3s;position:relative;}
 .btn:hover{opacity:0.9;}
 .tooltip{position:absolute;top:-28px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:6px 10px;border-radius:6px;font-size:12px;opacity:0;pointer-events:none;transition:0.3s;}
-.amount-wrapper{position:relative;margin-top:20px;text-align:center;}
-.amount-wrapper input{width:100%;max-width:280px;padding:16px 12px;border-radius:12px;border:2px solid rgba(0,0,0,0.15);font-weight:700;text-align:center;font-size:18px;transition:0.3s;outline:none;}
+.amount-wrapper{position:relative;margin-top:20px;text-align:center;display:flex;justify-content:center;align-items:center;gap:12px;}
+.amount-wrapper input{padding:16px 12px;border-radius:12px;border:2px solid rgba(0,0,0,0.15);font-weight:700;font-size:18px;text-align:center;width:180px;transition:0.3s;outline:none;}
 .amount-wrapper input:focus{border-color:var(--accent); box-shadow:0 0 14px rgba(12,182,222,0.5);}
-.amount-wrapper label{position:absolute;top:50%;left:12px;transform:translateY(-50%);color:var(--muted);font-size:13px;pointer-events:none;transition:0.3s;font-weight:600;}
-.amount-wrapper input:focus + label,
-.amount-wrapper input:not(:placeholder-shown) + label{top:-10px;font-size:11px;color:var(--accent);}
+.amount-wrapper label{position:absolute;top:-10px;left:0;right:0;margin:auto;color:var(--muted);font-size:13px;pointer-events:none;font-weight:600;text-align:center;}
 .products{max-width:960px;margin:40px auto;padding:0 14px;text-align:center;}
 .products h2{font-size:28px;margin-bottom:30px;color:var(--background);}
 .products .highlight{background:linear-gradient(90deg,var(--accent),var(--button));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
@@ -53,7 +52,7 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
 #backToTop{position:fixed; bottom:20px; right:20px; background:var(--button); color:#fff; border:none; border-radius:50%; width:50px; height:50px; font-size:24px; cursor:pointer; display:none; align-items:center; justify-content:center; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.3); transition:0.3s;}
 #backToTop:hover{background:var(--accent);}
 @media (max-width:1024px){.swing-row{flex-direction:column;text-align:center;}.swing-row .description{margin-bottom:12px;}.swing-row img{max-width:90%;}}
-@media (max-width:520px){ .card{padding:18px;margin:0 10px;} }
+@media (max-width:520px){ .card{padding:18px;margin:0 10px;} .amount-wrapper{flex-direction:column;gap:8px;}}
 </style>
 </head>
 <body>
@@ -95,7 +94,7 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
       <ol>
         <li>Salin nomor rekening dan lakukan transfer via m-banking/ATM.</li>
         <li>Masukkan jumlah transfer sesuai instruksi.</li>
-        <li>Kirim bukti transfer ke mentor/guru. Refresh halaman jika belum melakukan pembayaran dalam 15–20 menit.</li>
+        <li>Kirim bukti transfer ke mentor/guru. Refresh halaman jika belum melakukan pembayaran 15–20 menit.</li>
       </ol>
     </div>
   </article>
@@ -103,29 +102,32 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
   <!-- Section Produk -->
   <section class="products">
     <h2>Produk <span class="highlight">Kami</span></h2>
+
     <div class="swing-row" data-row>
       <div class="description">
         <h3>Investasi</h3>
         <p>Penuhi beragam kebutuhan pengembangan usaha Anda, dapatkan pembiayaan untuk aktivitas, rehabilitasi, hingga ekspansi usaha, dengan bunga 14% s.d. 18% per tahun.</p>
       </div>
-      <img src="/_nuxt/image/c85615.webp" alt="investment">
+      <img src="https://via.placeholder.com/360x240.png?text=Investasi" alt="investment">
     </div>
+
     <div class="swing-row" data-row>
       <div class="description">
         <h3>Modal Kerja</h3>
         <p>Ajukan pembiayaan modal kerja yang habis dalam satu siklus untuk mendukung arus kas dan kesehatan keuangan usaha Anda, dengan bunga 16% s.d. 30% per tahun.</p>
       </div>
-      <img src="/_nuxt/image/2a862b.webp" alt="work funding">
+      <img src="https://via.placeholder.com/360x240.png?text=Modal+Kerja" alt="work funding">
     </div>
+
     <div class="swing-row" data-row>
       <div class="description">
         <h3>Multiguna</h3>
         <p>Wujudkan beragam kebutuhan konsumtif Anda dengan cicilan yang fleksibel. Dari renovasi properti hingga biaya pengobatan, dengan bunga 16% s.d. 30% per tahun.</p>
       </div>
-      <img src="/_nuxt/image/7c62f4.webp" alt="multiuse">
+      <img src="https://via.placeholder.com/360x240.png?text=Multiguna" alt="multiuse">
     </div>
-  </section>
 
+  </section>
 </main>
 
 <footer class="site-footer">
@@ -183,16 +185,25 @@ function setBankLogoByName(name){
 
 els.copyAcct.addEventListener("click",()=>{
   const txt=els.acct.textContent;
-  if(txt && txt!=="-"){navigator.clipboard.writeText(onlyDigits(txt)); showTooltip(els.acctTooltip,"Disalin!");}
+  if(txt && txt!=="-"){
+    navigator.clipboard.writeText(onlyDigits(txt));
+    confetti();
+    showTooltip(els.acctTooltip,"Disalin!");
+  }
 });
 els.copyAmount.addEventListener("click",()=>{
   const val=onlyDigits(els.amountInput.value);
-  if(val){navigator.clipboard.writeText(val); showTooltip(els.amountTooltip,"Disalin!");}
-  else alert("Masukkan jumlah transfer");
+  if(val){
+    navigator.clipboard.writeText(val);
+    confetti();
+    showTooltip(els.amountTooltip,"Disalin!");
+  }else alert("Masukkan jumlah transfer");
 });
 
-// Confetti effect (simplified)
-function triggerConfetti(){/* bisa tambahkan library canvas confetti untuk efek premium */}
+// Confetti effect
+function confetti(){
+  confetti.create(null,{resize:true, useWorker:true})({particleCount:80, spread:120, origin:{y:0.6}});
+}
 
 // Input formatting
 els.amountInput.addEventListener("input", e=>{
