@@ -30,7 +30,7 @@ main.page{padding:90px 14px 40px;min-height:100vh;}
 .amount-wrapper{position:relative;margin-top:20px;text-align:center;display:flex;justify-content:center;align-items:center;gap:12px;}
 .amount-wrapper input{padding:16px 12px;border-radius:12px;border:2px solid rgba(0,0,0,0.15);font-weight:700;font-size:18px;text-align:center;width:180px;transition:0.3s;outline:none;}
 .amount-wrapper input:focus{border-color:var(--accent); box-shadow:0 0 14px rgba(12,182,222,0.5);}
-.amount-wrapper label{position:absolute;top:-10px;left:0;right:0;margin:auto;color:var(--muted);font-size:13px;pointer-events:none;font-weight:600;text-align:center;}
+.amount-wrapper label{position:absolute;top:-12px;left:0;right:0;margin:auto;color:var(--muted);font-size:15px;pointer-events:none;font-weight:600;text-align:center;}
 .products{max-width:960px;margin:40px auto;padding:0 14px;text-align:center;}
 .products h2{font-size:28px;margin-bottom:30px;color:var(--background);}
 .products .highlight{background:linear-gradient(90deg,var(--accent),var(--button));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
@@ -79,11 +79,11 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
       <button class="btn" id="copyAcctBtn">Salin Nomor Rekening</button>
     </div>
 
-    <div class="amount-wrapper">
-      <input type="text" id="amountInput" placeholder=" " inputmode="numeric" />
-      <label for="amountInput">Jumlah Transfer (Rp)</label>
-      <button class="btn" id="copyAmountBtn">Salin</button>
-    </div>
+<div class="amount-wrapper">
+  <label for="amountInput">Jumlah Transfer (Rp)</label>
+  <input type="text" id="amountInput" placeholder=" " inputmode="numeric" />
+  <button class="btn" id="copyAmountBtn">Salin</button>
+</div>
 
     <button class="btn" id="payNowBtn" style="margin-top:16px;width:100%;">Bayar Sekarang</button>
 
