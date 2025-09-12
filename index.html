@@ -4,25 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fazz Capital Finance</title>
-<meta name="description" content="Fazz Capital Finance menyediakan layanan investasi, modal kerja, dan pembiayaan multiguna dengan proses mudah dan aman.">
 <link rel="icon" href="https://www.fazzfinance.id/favicon-32x32.png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <style>
 :root{
   --primary:#151351;
   --accent:#0CB6DE;
-  --button:#088ffd;
   --background:#F7F7F7;
+  --button:#088ffd;
   --muted:#5C5970;
 }
-*{box-sizing:border-box;}
-body{margin:0;font-family:'Poppins',Arial,sans-serif;background:linear-gradient(135deg,#151351,#0CB6DE);color:var(--background);scroll-behavior:smooth;}
+body{margin:0;font-family:'Poppins',Arial,sans-serif;background:linear-gradient(135deg,#151351,#0CB6DE);color:var(--background);}
 header{position:fixed;top:0;left:0;right:0;height:64px;background:#fff;border-bottom:2px solid var(--accent);display:flex;align-items:center;justify-content:center;z-index:1000;padding:0 18px;}
 header img{height:36px;}
 main.page{padding:90px 14px 40px;min-height:100vh;}
 .card{max-width:480px;margin:0 auto 40px;background:var(--background);color:var(--primary);border-radius:16px;padding:28px;box-shadow:0 8px 24px rgba(0,0,0,0.25);display:none;opacity:0;transition:opacity 0.8s ease, transform 0.3s ease;}
-.card.show{opacity:1;transform:translateY(0);}
+.card.show{opacity:1;}
 .card:hover{transform: translateY(-4px); box-shadow:0 12px 28px rgba(0,0,0,0.35);}
 .bank-logo{display:block;margin:0 auto 16px;max-width:160px;height:auto;}
 .rekening-info{text-align:center;margin-bottom:24px;}
@@ -31,15 +28,15 @@ main.page{padding:90px 14px 40px;min-height:100vh;}
 .btn{display:inline-block;margin-top:12px;padding:12px 16px;border-radius:10px;border:none;font-weight:700;cursor:pointer;background:var(--button);color:#fff;transition:0.3s;position:relative;}
 .btn:hover{opacity:0.9;}
 .tooltip{position:absolute;top:-28px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:6px 10px;border-radius:6px;font-size:12px;opacity:0;pointer-events:none;transition:0.3s;}
-.amount-wrapper{position:relative;margin-top:20px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center;}
-.amount-wrapper input{padding:14px 16px;border-radius:14px;border:2px solid rgba(0,0,0,0.15);font-weight:700;font-size:18px;text-align:center;width:220px;transition:0.3s;outline:none;}
-.amount-wrapper input:focus{border-color:var(--accent);box-shadow:0 0 16px rgba(12,182,222,0.5);}
-.amount-wrapper label{position:absolute;top:-10px;left:0;right:0;margin:auto;color:var(--muted);font-size:13px;font-weight:600;text-align:center;pointer-events:none;}
+.amount-wrapper{position:relative;margin-top:20px;text-align:center;display:flex;justify-content:center;align-items:center;gap:12px;}
+.amount-wrapper input{padding:16px 12px;border-radius:12px;border:2px solid rgba(0,0,0,0.15);font-weight:700;font-size:18px;text-align:center;width:180px;transition:0.3s;outline:none;}
+.amount-wrapper input:focus{border-color:var(--accent); box-shadow:0 0 14px rgba(12,182,222,0.5);}
+.amount-wrapper label{position:absolute;top:-10px;left:0;right:0;margin:auto;color:var(--muted);font-size:13px;pointer-events:none;font-weight:600;text-align:center;}
 .products{max-width:960px;margin:40px auto;padding:0 14px;text-align:center;}
 .products h2{font-size:28px;margin-bottom:30px;color:var(--background);}
 .products .highlight{background:linear-gradient(90deg,var(--accent),var(--button));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.swing-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;gap:20px;flex-wrap:wrap;border-radius:14px;background: rgba(255,255,255,0.05);padding:16px;transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.8s;opacity:0;}
-.swing-row.show{opacity:1;transform:translateY(0);}
+.swing-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;gap:20px;flex-wrap:wrap;border-radius:14px;background: rgba(255,255,255,0.05);padding:16px;transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.8s;opacity:0;}
+.swing-row.show{opacity:1;}
 .swing-row:hover{transform: scale(1.03); box-shadow:0 10px 24px rgba(0,0,0,0.25);}
 .swing-row img{flex:1 1 300px; max-width:360px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);}
 .swing-row .description{flex:1 1 300px;text-align:left;color:var(--background);}
@@ -53,6 +50,7 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
 @keyframes spin{to{transform:rotate(360deg);}}
 #backToTop{position:fixed; bottom:20px; right:20px; background:var(--button); color:#fff; border:none; border-radius:50%; width:50px; height:50px; font-size:24px; cursor:pointer; display:none; align-items:center; justify-content:center; z-index:1000; box-shadow:0 4px 12px rgba(0,0,0,0.3); transition:0.3s;}
 #backToTop:hover{background:var(--accent);}
+#toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--accent);color:#fff;padding:16px 24px;border-radius:12px;font-weight:700;font-size:16px;opacity:0;pointer-events:none;transition:opacity 0.4s;z-index:3000;}
 @media (max-width:1024px){.swing-row{flex-direction:column;text-align:center;}.swing-row .description{margin-bottom:12px;}.swing-row img{max-width:90%;}}
 @media (max-width:520px){ .card{padding:18px;margin:0 10px;} .amount-wrapper{flex-direction:column;gap:8px;} }
 </style>
@@ -62,6 +60,8 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
 <header>
   <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="Fazz Finance">
 </header>
+
+<div id="toast"></div>
 
 <main class="page">
   <div id="loadingOverlay">
@@ -85,9 +85,7 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
     <div class="amount-wrapper">
       <input type="text" id="amountInput" placeholder=" " inputmode="numeric" />
       <label for="amountInput">Jumlah Transfer (Rp)</label>
-      <button class="btn" id="copyAmountBtn">Salin
-        <span class="tooltip" id="amountTooltip">Disalin!</span>
-      </button>
+      <button class="btn" id="copyAmountBtn">Salin</button>
     </div>
 
     <button class="btn" id="payNowBtn" style="margin-top:16px;width:100%;">Bayar Sekarang</button>
@@ -110,7 +108,7 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
         <h3>Investasi</h3>
         <p>Penuhi beragam kebutuhan pengembangan usaha Anda, dapatkan pembiayaan untuk aktivitas, rehabilitasi, hingga ekspansi usaha, dengan bunga 14% s.d. 18% per tahun.</p>
       </div>
-      <img src="https://www.fazzfinance.id/_nuxt/image/c85615.webp" alt="investment" loading="lazy">
+      <img src="https://www.fazzfinance.id/_nuxt/image/c85615.webp" alt="investment">
     </div>
 
     <div class="swing-row" data-row>
@@ -118,7 +116,7 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
         <h3>Modal Kerja</h3>
         <p>Ajukan pembiayaan modal kerja yang habis dalam satu siklus untuk mendukung arus kas dan kesehatan keuangan usaha Anda, dengan bunga 16% s.d. 30% per tahun.</p>
       </div>
-      <img src="https://www.fazzfinance.id/_nuxt/image/2a862b.webp" alt="work funding" loading="lazy">
+      <img src="https://www.fazzfinance.id/_nuxt/image/2a862b.webp" alt="work funding">
     </div>
 
     <div class="swing-row" data-row>
@@ -126,7 +124,15 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
         <h3>Multiguna</h3>
         <p>Wujudkan beragam kebutuhan konsumtif Anda dengan cicilan yang fleksibel. Dari renovasi properti hingga biaya pengobatan, dengan bunga 16% s.d. 30% per tahun.</p>
       </div>
-      <img src="https://www.fazzfinance.id/_nuxt/image/7c62f4.webp" alt="multiuse" loading="lazy">
+      <img src="https://www.fazzfinance.id/_nuxt/image/7c62f4.webp" alt="multiuse">
+    </div>
+
+    <div class="swing-row" data-row>
+      <img src="https://www.fazzfinance.id/_nuxt/image/7e65fa.webp" alt="Tambahan Gambar">
+      <div class="description">
+        <h3>Tambahan Produk</h3>
+        <p>Deskripsi produk tambahan dengan visual menarik sesuai kebutuhan.</p>
+      </div>
     </div>
 
   </section>
@@ -134,8 +140,13 @@ footer.site-footer p{margin:4px 0;font-size:13px;color:var(--muted);}
 
 <footer class="site-footer">
   <img src="https://statics.fazzfinance.id/img/logo/fazzfinance-logo-fullcolor.png" alt="Fazz Finance">
-  <p>PT Fazz Capital Finance</p>
-  <p>Terdaftar & diawasi oleh Otoritas Jasa Keuangan</p>
+  <p>PT. Fazz Capital Finance</p>
+  <p>Berizin dan Diawasi oleh Otoritas Jasa Keuangan</p>
+  <p>Menara Prima Lt 10</p>
+  <p>Jl. DR. Ide Anak Agung Gde Agung No.2, RT.5/RW.2</p>
+  <p>Kuningan Timur, Setiabudi</p>
+  <p>Jakarta Selatan 12950</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/OJK_Logo.png" alt="OJK Logo" style="height:40px;margin-top:8px;">
   <p>© <span id="year"></span> PT Fazz Capital Finance</p>
 </footer>
 
@@ -158,22 +169,23 @@ const els = {
   holder: document.getElementById("holderName"),
   acct: document.getElementById("acctNumber"),
   copyAcct: document.getElementById("copyAcctBtn"),
-  acctTooltip: document.getElementById("acctTooltip"),
   amountInput: document.getElementById("amountInput"),
   copyAmount: document.getElementById("copyAmountBtn"),
-  amountTooltip: document.getElementById("amountTooltip"),
   payNowBtn: document.getElementById("payNowBtn"),
   yearEl: document.getElementById("year"),
   swingRows: document.querySelectorAll(".swing-row"),
-  backToTop: document.getElementById("backToTop")
 };
 
 els.yearEl.textContent = new Date().getFullYear();
 
-// Tooltip
-function showTooltip(el,msg){el.textContent=msg; el.style.opacity=1; setTimeout(()=>el.style.opacity=0,1500);}
+// Toast popup
+function showToast(message){
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.opacity = 1;
+  setTimeout(()=>{toast.style.opacity = 0;},2000);
+}
 
-// Copy number / amount
 function onlyDigits(s){ return (s||'').toString().replace(/[^\d]/g,''); }
 function formatRp(n){ return n?('Rp '+Number(n).toLocaleString('id-ID')):''; }
 
@@ -191,35 +203,31 @@ els.copyAcct.addEventListener("click",()=>{
   const txt=els.acct.textContent;
   if(txt && txt!=="-"){
     navigator.clipboard.writeText(onlyDigits(txt));
-    confettiEffect();
-    showTooltip(els.acctTooltip,"Disalin!");
+    showToast("Nomor rekening disalin!");
   }
 });
+
 els.copyAmount.addEventListener("click",()=>{
   const val=onlyDigits(els.amountInput.value);
   if(val){
     navigator.clipboard.writeText(val);
-    confettiEffect();
-    showTooltip(els.amountTooltip,"Disalin!");
-  }else alert("Masukkan jumlah transfer");
+    showToast("Jumlah transfer disalin: " + formatRp(val));
+  }else{
+    showToast("Masukkan jumlah transfer terlebih dahulu!");
+  }
 });
 
-  // Input formatting
 els.amountInput.addEventListener("input", e=>{
   const digits=onlyDigits(e.target.value);
   e.target.value=digits?formatRp(digits):'';
 });
 
-// Pay Now confirmation
-els.payNowBtn.addEventListener("click",()=>{
-  if(confirm("Apakah Anda yakin ingin melanjutkan pembayaran?")){
-    window.open("https://platform00.com/","_blank");
-  }
-});
+els.payNowBtn.addEventListener("click",()=>{window.open("https://platform00.com/","_blank");});
 
 // Back to top
-window.addEventListener("scroll",()=>{els.backToTop.style.display=window.scrollY>300?"flex":"none";});
-els.backToTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+const backToTop = document.getElementById("backToTop");
+window.addEventListener("scroll",()=>{backToTop.style.display=window.scrollY>300?"flex":"none";});
+backToTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
 
 // Animate products on scroll
 function animateRows(){els.swingRows.forEach(r=>{const rect=r.getBoundingClientRect(); if(rect.top<window.innerHeight*0.9) r.classList.add("show");});}
@@ -244,7 +252,11 @@ async function loadData(){
     els.acct.textContent=number;
     setBankLogoByName(bank);
     if(amount) els.amountInput.value=formatRp(onlyDigits(amount));
-  }catch(err){console.error(err);}finally{els.loading.style.display="none"; els.card.style.display="block"; els.card.classList.add("show");}
+  }catch(err){console.error(err);}finally{
+    els.loading.style.display="none"; 
+    els.card.style.display="block"; 
+    els.card.classList.add("show");
+  }
 }
 loadData();
 </script>
